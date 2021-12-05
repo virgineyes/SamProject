@@ -22,18 +22,11 @@
         <div class="container">
           <div class="md-layout text-center">
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
-              <h2>Do you love this UI Kit?</h2>
+              <h2>Do you love this Kids World?</h2>
               <h4>
-                Cause if you do, it can be yours for FREE. Hit the buttons below
-                to navigate to our website where you can find the kit. Our
-                friends from
-                <a
-                  href="https://themeisle.com/?utm_campaign=mkfree-hestia&amp;utm_source=creativetim&amp;utm_medium=website"
-                  target="_blank"
-                  >ThemeIsle</a
-                >
-                created a Wordpress Theme which can be also downloaded for free.
-                Start a new project or give an old Bootstrap project a new look!
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               </h4>
             </div>
           </div>
@@ -43,20 +36,9 @@
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
               <h2>Want more?</h2>
               <h4>
-                We've just launched
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-dashboard-pro?ref=utp-mk-demos"
-                  target="_blank"
-                  >Vue Material Dashboard PRO</a
-                >
-                and
-                <a
-                  href="https://www.creative-tim.com/product/vue-material-kit-pro?ref=utp-vmk-demos"
-                  target="_blank"
-                  >Vue Material Kit PRO</a
-                >. Every product has a huge number of components, sections and
-                example pages. Start Your Development With A Badass Bootstrap UI
-                Kit inspired by Material Design.
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               </h4>
             </div>
           </div>
