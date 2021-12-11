@@ -283,22 +283,22 @@
 export default {
   bodyClass: "landing-page",
   props: {
-    header: {
-      type: String,
-      default: require("@/assets/img/bg7.jpg")
-    },
-    teamImg1: {
-      type: String,
-      default: require("@/assets/img/faces/avatar.jpg")
-    },
-    teamImg2: {
-      type: String,
-      default: require("@/assets/img/faces/christian.jpg")
-    },
-    teamImg3: {
-      type: String,
-      default: require("@/assets/img/faces/kendall.jpg")
-    }
+    // header: {
+    //   type: String,
+    //   default: require("@/assets/img/bg7.jpg")
+    // },
+    // teamImg1: {
+    //   type: String,
+    //   default: require("@/assets/img/faces/avatar.jpg")
+    // },
+    // teamImg2: {
+    //   type: String,
+    //   default: require("@/assets/img/faces/christian.jpg")
+    // },
+    // teamImg3: {
+    //   type: String,
+    //   default: require("@/assets/img/faces/kendall.jpg")
+    // }
   },
   data() {
     return {

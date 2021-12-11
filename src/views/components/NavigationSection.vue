@@ -286,14 +286,14 @@ export default {
     };
   },
   props: {
-    image: {
-      type: String,
-      default: require("@/assets/img/bg.jpg")
-    },
-    img: {
-      type: String,
-      default: require("@/assets/img/faces/avatar.jpg")
-    }
+    // image: {
+    //   type: String,
+    //   default: require("@/assets/img/bg.jpg")
+    // },
+    // img: {
+    //   type: String,
+    //   default: require("@/assets/img/faces/avatar.jpg")
+    // }
   },
   computed: {
     bgImage() {

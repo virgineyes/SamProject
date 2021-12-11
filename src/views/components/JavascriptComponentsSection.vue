@@ -204,10 +204,10 @@ export default {
   data() {
     return {
       classicModal: false,
-      selectedDate: new Date("2018/03/26"),
-      carousel1: require("@/assets/img/nature-2.jpg"),
-      carousel2: require("@/assets/img/nature.jpg"),
-      carousel3: require("@/assets/img/nature-3.jpg")
+      selectedDate: new Date("2018/03/26")
+      // carousel1: require("@/assets/img/nature-2.jpg"),
+      // carousel2: require("@/assets/img/nature.jpg"),
+      // carousel3: require("@/assets/img/nature-3.jpg")
     };
   },
   methods: {

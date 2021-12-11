@@ -83,34 +83,34 @@ export default {
       type: String,
       default: require("@/assets/img/vue-mk-header.png")
     },
-    leaf4: {
-      type: String,
-      default: require("@/assets/img/leaf4.png")
-    },
-    leaf3: {
-      type: String,
-      default: require("@/assets/img/leaf3.png")
-    },
-    leaf2: {
-      type: String,
-      default: require("@/assets/img/leaf2.png")
-    },
-    leaf1: {
-      type: String,
-      default: require("@/assets/img/leaf1.png")
-    },
-    signup: {
-      type: String,
-      default: require("@/assets/img/city.jpg")
-    },
-    landing: {
-      type: String,
-      default: require("@/assets/img/landing.jpg")
-    },
-    profile: {
-      type: String,
-      default: require("@/assets/img/profile.jpg")
-    }
+    // leaf4: {
+    //   type: String,
+    //   default: require("@/assets/img/leaf4.png")
+    // },
+    // leaf3: {
+    //   type: String,
+    //   default: require("@/assets/img/leaf3.png")
+    // },
+    // leaf2: {
+    //   type: String,
+    //   default: require("@/assets/img/leaf2.png")
+    // },
+    // leaf1: {
+    //   type: String,
+    //   default: require("@/assets/img/leaf1.png")
+    // },
+    // signup: {
+    //   type: String,
+    //   default: require("@/assets/img/city.jpg")
+    // },
+    // landing: {
+    //   type: String,
+    //   default: require("@/assets/img/landing.jpg")
+    // },
+    // profile: {
+    //   type: String,
+    //   default: require("@/assets/img/profile.jpg")
+    // }
   },
   data() {
     return {
