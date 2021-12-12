@@ -8,7 +8,7 @@
   >
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Kids World</h3>
+        <h3 class="md-title">玩酷教育</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -64,7 +64,7 @@
               </li>
 
               <md-list-item
-                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                href="#"
                 target="_blank"
                 v-if="showDownload"
               >
@@ -73,7 +73,7 @@
               </md-list-item>
 
               <md-list-item
-                href="javascript:void(0)"
+                href="#"
                 @click="scrollToElement()"
                 v-if="showDownload"
               >
@@ -122,7 +122,7 @@
               </li>
 
               <md-list-item
-                href="https://twitter.com/CreativeTim"
+                href="#"
                 target="_blank"
               >
                 <i class="fab fa-twitter"></i>
@@ -132,7 +132,7 @@
                 >
               </md-list-item>
               <md-list-item
-                href="https://www.facebook.com/CreativeTim"
+                href="#"
                 target="_blank"
               >
                 <i class="fab fa-facebook-square"></i>
@@ -142,7 +142,7 @@
                 >
               </md-list-item>
               <md-list-item
-                href="https://www.instagram.com/CreativeTimOfficial"
+                href="#"
                 target="_blank"
               >
                 <i class="fab fa-instagram"></i>
