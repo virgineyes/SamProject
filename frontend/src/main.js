@@ -35,6 +35,14 @@ Vue.mixin({
 });
 
 new Vue({
+  // created() {
+  //   // Google Sign-in initial
+  //   window.gapi.load('auth2', () => {
+  //     window.gapi.auth2.init({
+  //       client_id: '813671208212-oi8h9oossnqb5c5m2blmffrel0tc9b89.apps.googleusercontent.com',
+  //     });
+  //   });
+  // },
   router,
   render: h => h(App)
 }).$mount("#app");

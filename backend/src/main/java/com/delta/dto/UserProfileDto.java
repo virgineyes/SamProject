@@ -5,19 +5,27 @@ import lombok.Setter;
 
 /**
  * @author: ACE.CHIU
- * @create: 2021-02-23
+ * @create: 2022-06-30
  */
 @Getter
 @Setter
 public class UserProfileDto {
 
-  private String classDate;
+  private String name;
   
-  private String weekDate;
+  private String birthday;
+  
+  private String email;
+  
+  private String school;
+  
+  private String phone;
+  
+  private String guardianName;
 
-  private String coach;
+  private String guardianPhone;
   
-  private Integer remindAccount;
+  private String guardianEmail;
   
-  private Boolean additional;
+  private String address;
 }

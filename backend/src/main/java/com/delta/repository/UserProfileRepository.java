@@ -1,6 +1,6 @@
 package com.delta.repository;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +12,5 @@ import com.delta.entity.UserProfile;
  */
 @Repository
 public interface UserProfileRepository extends BasicJpaRepository<UserProfile> {
-	 List<UserProfile> findByWeekDateAndAdditional(String weekDate, boolean additional);
+  Optional<UserProfile> findByEmail(String email);
 }

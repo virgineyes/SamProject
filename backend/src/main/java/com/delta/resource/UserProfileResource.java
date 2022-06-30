@@ -1,9 +1,6 @@
 package com.delta.resource;
 
-import java.util.Set;
-
 import com.delta.entity.UserProfile;
-import com.delta.entity.Registration;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
@@ -18,14 +15,8 @@ public class UserProfileResource extends BaseEntityResource<UserProfile> {
   @Getter
   private UserProfile entity;
   
-  @JsonInclude
-  public Set<Registration> getRegistrations() {
-    return entity.getRegistrations();
-  }
-  
   @Override
   public String getResourceType() {
     return UserProfile.class.getSimpleName();
   }
-
 }

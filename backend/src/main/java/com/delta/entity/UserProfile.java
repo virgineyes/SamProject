@@ -1,12 +1,6 @@
 package com.delta.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,41 +10,40 @@ import lombok.Setter;
 
 /**
  * @author: ACE.CHIU
- * @create: 2021-02-22
+ * @create: 2022-06-30
  */
 @Entity
-@ApiModel(value = "Golf Class", description = "高爾夫課程")
+@Getter 
+@Setter
+@ApiModel(value = "User Profile", description = "使用者資調")
 public class UserProfile extends BaseEntity {
 
   private static final long serialVersionUID = 3138912709489043965L;
 
-  @Getter
-  @Setter
-  @ApiModelProperty(value = "課程日期")
-  private String classDate;
+  @ApiModelProperty(value = "姓名")
+  private String name;
   
-  @Getter 
-  @Setter
-  @ApiModelProperty(value = "星期幾")
-  private String weekDate;
+  @ApiModelProperty(value = "生日")
+  private String birthday;
   
-  @Getter 
-  @Setter
-  @ApiModelProperty(value = "是否額外新增")
-  private Boolean additional;
+  @ApiModelProperty(value = "Email")
+  private String email;
   
-  @Getter 
-  @Setter
-  @ApiModelProperty(value = "教練")
-  private String coach;
+  @ApiModelProperty(value = "學校名稱")
+  private String school;
   
-  @Getter
-  @Setter
-  @ApiModelProperty(value = "剩餘數量")
-  private Integer remindAccount;
+  @ApiModelProperty(value = "電話")
+  private String phone;
   
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "golfClass", orphanRemoval = true)
-  @Getter
-  @Setter
-  private Set<Registration> registrations = new HashSet<>();
+  @ApiModelProperty(value = "監護人姓名")
+  private String guardianName;
+
+  @ApiModelProperty(value = "監護人連絡電話")
+  private String guardianPhone;
+  
+  @ApiModelProperty(value = "監護人連絡Email")
+  private String guardianEmail;
+  
+  @ApiModelProperty(value = "連絡地址")
+  private String address;
 }
