@@ -27,7 +27,7 @@
               <!-- Here you can add your items from the section-start of your toolbar -->
             </mobile-menu>
             <md-list>
-              <li class="md-list-item" v-if="!showDownload">
+              <!-- <li class="md-list-item">
                 <a
                   href="javascript:void(0)"
                   class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -61,9 +61,9 @@
                     </drop-down>
                   </div>
                 </a>
-              </li>
+              </li> -->
 
-              <md-list-item
+              <!-- <md-list-item
                 href="#"
                 target="_blank"
                 v-if="showDownload"
@@ -79,47 +79,7 @@
               >
                 <i class="material-icons">cloud_download</i>
                 <p>Download</p>
-              </md-list-item>
-
-              <li class="md-list-item" v-else>
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">view_carousel</i>
-                        <p>Examples</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/landing">
-                            <i class="material-icons">view_day</i>
-                            <p>Landing Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/login">
-                            <i class="material-icons">fingerprint</i>
-                            <p>Login Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/profile">
-                            <i class="material-icons">account_circle</i>
-                            <p>Profile Page</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
-                  </div>
-                </a>
-              </li>
+              </md-list-item> -->
 
               <md-list-item
                 href="#"
@@ -151,6 +111,46 @@
                   >Follow us on Instagram</md-tooltip
                 >
               </md-list-item>
+
+              <li class="md-list-item">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                >
+                  <div class="md-list-item-content">
+                    <drop-down direction="down">
+                      <md-button
+                        slot="title"
+                        class="md-button md-button-link md-white md-simple dropdown-toggle"
+                        data-toggle="dropdown"
+                      >
+                        <i class="material-icons">account_circle</i>
+                        <p>使用者</p>
+                      </md-button>
+                      <ul class="dropdown-menu dropdown-with-icons">
+                        <!-- <li>
+                          <a href="#/landing">
+                            <i class="material-icons">view_day</i>
+                            <p>Landing Page</p>
+                          </a>
+                        </li> -->
+                        <li>
+                          <a href="#" @click="login">
+                            <!-- <i class="material-icons">fingerprint</i> -->
+                            <p>登入</p>
+                          </a> 
+                        </li>
+                        <!-- <li>
+                          <a href="#/profile">
+                            <i class="material-icons">account_circle</i>
+                            <p>Profile Page</p>
+                          </a>
+                        </li> -->
+                      </ul>
+                    </drop-down>
+                  </div>
+                </a>
+              </li>
             </md-list>
           </div>
         </div>
@@ -206,12 +206,12 @@ export default {
     };
   },
   computed: {
-    showDownload() {
-      const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
+
   },
   methods: {
+    login() {
+      window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=813671208212-oi8h9oossnqb5c5m2blmffrel0tc9b89.apps.googleusercontent.com&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&redirect_uri=http://localhost:8080/redirect'
+    },
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 

@@ -24,10 +24,7 @@
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
               <h2>Do you love this PlaycoolEdu?</h2>
               <h6>
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。
               </h6>
             </div>
           </div>
@@ -36,10 +33,7 @@
             <div class="md-layout-item md-size-66 md-small-size-100 mx-auto">
               <h2>Want more?</h2>
               <h6> 
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。這裡是玩酷世界，歡迎加入我們。
               </h6>
             </div>
           </div>
@@ -59,9 +53,6 @@
             >
             <md-button class="md-google"
               ><i class="fab fa-google-plus"></i> Share</md-button
-            >
-            <md-button class="md-github"
-              ><i class="fab fa-github"></i> Star</md-button
             >
           </div>
         </div>
