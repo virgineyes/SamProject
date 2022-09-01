@@ -18,10 +18,10 @@ import io.swagger.annotations.ApiParam;
 
 /**
  * @author: ACE.CHIU
- * @create: 2021-02-23
+ * @create: 2022-08-16
  */
 //@Slf4j
-@Api(value = "Region", tags = "使用者管理")
+@Api(value = "User Profile", tags = "使用者管理")
 @RestController
 public class UserProfileController {
 
@@ -37,7 +37,7 @@ public class UserProfileController {
   }
 
   @ApiOperation(value = "新增使用者")
-  @PostMapping(value = ResourcePaths.USER_PROFILE + "/add/{email}")
+  @PostMapping(value = ResourcePaths.USER_PROFILE + "/add/{o}")
   public UserProfile create(@ApiParam(value = "email") @PathVariable String email) {
     return userProfileService.create(email);
   }

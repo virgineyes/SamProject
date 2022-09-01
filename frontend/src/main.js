@@ -1,25 +1,35 @@
-// =========================================================
-// * Vue Material Kit - v1.2.2
-// =========================================================
-//
-// * Product Page: https://www.creative-tim.com/product/vue-material-kit
-// * Copyright 2019 Creative Tim (https://www.creative-tim.com)
-// * Licensed under MIT (https://github.com/creativetimofficial/vue-material-kit/blob/master/LICENSE.md)
-//
-// * Coded by Creative Tim
-//
-// =========================================================
-//
-// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 import Vue from "vue";
+import Vuex from "vuex"
 import App from "./App.vue";
 import router from "./router";
-
+import axios from "axios"
 import MaterialKit from "./plugins/material-kit";
 
-Vue.config.productionTip = false;
+const axiosInstance = axios.create({
+  baseURL: process.env.VUE_APP_BACKEND_URL
+})
 
+axiosInstance.interceptors.request.use(
+  config => {
+    // config.headers["Accept-Language"] = store.getters.getLanguage
+    // config.headers["Authorization"] = "Bearer " + getCookie(process.env.VUE_APP_AUTH_TOKEN_NAME)
+    // config.headers["Content-Type"] = "application/json"
+    return config
+  },
+  error => {
+    store.commit(types.LOADING, false)
+    Swal.fire({
+      icon: "error",
+      title: Translate("COMMON_MESSAGE_ERROR"),
+      text: Translate("COMMON_MESSAGE_SYSTEM_ERROR"),
+    })
+    return Promise.reject(error)
+  }
+)
+
+Vue.prototype.$http = axiosInstance
+Vue.config.productionTip = false;
+Vuex.Store.prototype.$http = axiosInstance
 Vue.use(MaterialKit);
 
 const NavbarStore = {
@@ -35,14 +45,6 @@ Vue.mixin({
 });
 
 new Vue({
-  // created() {
-  //   // Google Sign-in initial
-  //   window.gapi.load('auth2', () => {
-  //     window.gapi.auth2.init({
-  //       client_id: '813671208212-oi8h9oossnqb5c5m2blmffrel0tc9b89.apps.googleusercontent.com',
-  //     });
-  //   });
-  // },
   router,
   render: h => h(App)
 }).$mount("#app");
