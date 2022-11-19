@@ -1,5 +1,8 @@
 package com.delta.api;
 
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -9,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.delta.common.ResourcePaths;
+import com.delta.entity.UserProfile;
 import com.delta.request.GoogleTokenRequest;
 import com.delta.request.GoogleUserPerfileResponse;
 import com.delta.request.GooleTokenResponse;
+import com.delta.service.UserProfileService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class GoogleAuthController {
   private RestTemplate restTemplate = new RestTemplate();
+  
+  @Autowired
+  private UserProfileService userProfileService;
   
   @ApiOperation(value = "換 Token")
   @GetMapping(value = ResourcePaths.GOOGLE_AUTH + "/getToken/{code}")
@@ -52,6 +60,15 @@ public class GoogleAuthController {
   public GoogleUserPerfileResponse getUserProfile(@ApiParam(value = "token") @PathVariable String token) {
     log.info("token: " + token);
     GoogleUserPerfileResponse response = restTemplate.getForObject("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token={token}", GoogleUserPerfileResponse.class, token);
+    UserProfile userProfile = userProfileService.findByGoogleId(response.getId());
+    if (Objects.isNull(userProfile)) {
+      userProfile = new UserProfile();
+      userProfile.setGoogleId(response.getId());
+      userProfile.setGiven_name(response.getGiven_name());
+      userProfile.setFamily_name(response.getFamily_name());
+      userProfileService.save(userProfile);
+    }
+    
     return response;
   }
 }

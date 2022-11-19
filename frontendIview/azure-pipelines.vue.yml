@@ -1,0 +1,89 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - backend/azure-pipelines.pr.yml
+      - backend/azure-pipelines.maven.yml
+      - backend/azure-pipelines.maven.sca.yml
+      - frontend/azure-pipelines.vue.yml
+      - frontend/azure-pipelines.vue.sca.yml
+      - ec-auth/
+      - ec-quotation/
+      - ec-core/
+      - src/
+      - pom.xml
+      - README.md
+    include:
+      - frontend
+
+pr: none
+
+jobs:
+  - job: "Build_npm_and_Docker_Image"
+    displayName: "Build npm And Docker Image"
+    pool: Delta IT Ubuntu 1604
+    timeoutInMinutes: 60
+    workspace:
+      clean: outputs
+    variables:
+      system.debug: true
+
+    steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'IT-DOCKER'
+          command: 'login'
+
+      - task: Bash@3
+        displayName: 'npm install and build'
+        inputs:
+          targetType: 'inline'
+          script: |
+            npm install --verbose
+            npm run build
+          failOnStderr: false
+          workingDirectory: frontend
+
+      - task: Bash@3
+        displayName: 'Get Version'
+        inputs:
+          targetType: 'inline'
+          script: |
+            DATE=`date '+%Y%m%d-%H%M%S'`
+            VERSION_TAG=`git describe --always --abbrev=7`
+            echo $DATE.$VERSION_TAG
+            TAG=it-docker.deltaww.com/ec-frontend:$DATE.$VERSION_TAG
+            echo $TAG
+            echo "##vso[task.setvariable variable=TAG]$TAG"
+            echo $DATE.$VERSION_TAG | tee dist/version.txt
+          failOnStderr: false
+          workingDirectory: frontend
+
+      - task: Bash@3
+        displayName: 'Docker build and push'
+        inputs:
+          targetType: 'inline'
+          script: |
+            docker build -t $TAG .
+            docker push $TAG
+            docker image prune -f
+            docker container prune -f
+          failOnStderr: true
+          workingDirectory: frontend
+
+      # - task: Bash@3
+      #   displayName: 'Create container and run ansible'
+      #   inputs:
+      #     targetType: 'inline'
+      #     script: |
+      #       docker run it-docker.deltaww.com/ansible:latest /bin/bash -c "cd /home;ansible-playbook jira.yml -e 'summary=\"Build ID: $(Build.BuildNumber) - authnz-frontend\" description=$(Build.DefinitionName) version=$(TAG) parent=ITAPDEV-0 component=0'"
+      #       docker container prune -f
+      #       docker image rm it-docker.deltaww.com/ansible:latest
+

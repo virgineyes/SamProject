@@ -1,7 +1,5 @@
 package com.delta.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +8,6 @@ import com.delta.entity.UserProfile;
 import com.delta.exception.SystemDataExistsException;
 import com.delta.repository.BasicJpaRepository;
 import com.delta.repository.UserProfileRepository;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author: ACE.CHIU
@@ -23,13 +19,6 @@ public class UserProfileService extends BasicService<UserProfile> {
 
 	@Autowired
 	private UserProfileRepository repository;
-
-	public UserProfile create(String email) {
-        UserProfile userProfile = new UserProfile();
-		userProfile.setEmail(email);
-		repository.save(userProfile);
-		return userProfile;
-	}
 
 	public UserProfile update(UserProfileDto userProfileDto) {
 	    UserProfile userProfile = repository.findByEmail(userProfileDto.getEmail()).orElse(new UserProfile());
@@ -46,10 +35,14 @@ public class UserProfileService extends BasicService<UserProfile> {
 		}
 	}
 
-	public UserProfile search(String email) {
-		return repository.findByEmail(email).orElse(new UserProfile());
+	public UserProfile findByEmail(String email) {
+		return repository.findByEmail(email).orElse(null);
 	}
-
+	
+    public UserProfile findByGoogleId(String googleId) {
+      return repository.findByGoogleId(googleId).orElse(null);
+    }	
+    
 	@Override
 	public BasicJpaRepository<UserProfile> getRepository() {
 		return repository;

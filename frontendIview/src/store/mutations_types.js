@@ -1,0 +1,12 @@
+export const LOADING = 'LOADING'
+export const LANGUAGE = 'LANGUAGE'
+export const TOKEN = 'TOKEN'
+export const LOGIN = "LOGIN"
+export const SMALL_DEVICE = "SMALL_DEVICE"
+export const USER_PROFILE = "USER_PROFILE"
+export const REDIRECT_URL = "REDIRECT_URL"
+export const GROUP_CODE = "GROUP_CODE"
+export const WINDOWS_WIDTH = "WINDOWS_WIDTH"
+export const WINDOWS_HEIGHT = "WINDOWS_HEIGHT"
+export const CONTENT_TYPE = "CONTENT_TYPE"
+export const MENU_OPTIONS_LEFT = "MENU_OPTIONS_LEFT"

@@ -31,21 +31,17 @@ public class UserProfileController {
 //  @Autowired
 //  private UserProfileResourceAssembler assembler;
   
-  @GetMapping("/test")
-  public String test() {
-    return "test";
-  }
-
-  @ApiOperation(value = "新增使用者")
-  @PostMapping(value = ResourcePaths.USER_PROFILE + "/add/{o}")
-  public UserProfile create(@ApiParam(value = "email") @PathVariable String email) {
-    return userProfileService.create(email);
+  
+  @ApiOperation(value = "根據 groupId 搜尋使用者")
+  @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/goolgeId/{googleId}")
+  public UserProfile findByGooldId(@ApiParam(value = "googleId") @PathVariable String googleId) {
+    return userProfileService.findByGoogleId(googleId);
   }
   
-  @ApiOperation(value = "搜尋使用者")
-  @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/{email}")
-  public UserProfile search(@ApiParam(value = "email") @PathVariable String email) {
-    return userProfileService.search(email);
+  @ApiOperation(value = "根據 email 搜尋使用者")
+  @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/email/{email}")
+  public UserProfile findByEmail(@ApiParam(value = "email") @PathVariable String email) {
+    return userProfileService.findByEmail(email);
   }
   
   @ApiOperation(value = "維護使用者")

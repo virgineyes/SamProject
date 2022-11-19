@@ -19,9 +19,15 @@ import lombok.Setter;
 public class UserProfile extends BaseEntity {
 
   private static final long serialVersionUID = 3138912709489043965L;
+  
+  @ApiModelProperty(value = "GOOGLE ID")
+  private String googleId;
 
-  @ApiModelProperty(value = "姓名")
-  private String name;
+  @ApiModelProperty(value = "姓氏")
+  private String family_name;
+  
+  @ApiModelProperty(value = "名子")
+  private String given_name;
   
   @ApiModelProperty(value = "生日")
   private String birthday;

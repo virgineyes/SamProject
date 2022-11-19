@@ -8,9 +8,10 @@ import com.delta.entity.UserProfile;
 
 /**
  * @author: ACE.CHIU
- * @create: 2021-02-24
+ * @create: 2022-09-25
  */
 @Repository
 public interface UserProfileRepository extends BasicJpaRepository<UserProfile> {
   Optional<UserProfile> findByEmail(String email);
+  Optional<UserProfile> findByGoogleId(String googleId);
 }
