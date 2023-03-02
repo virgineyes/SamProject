@@ -9,7 +9,6 @@
       <Select v-model="locale" @on-change="changeLang" style="width: 100px; padding: 5px;">
         <Option value="zh-TW">繁體中文</Option>
         <Option value="en">English</Option>
-        <Option value="zh-CN">简体中文</Option>
       </Select>
       <template v-if="isLogin"  style="padding: 2px;">
         <Dropdown @on-click="auhtControl($event)" style="margin-left: 18px">
@@ -27,11 +26,11 @@
         <div class="logoTilt p-1">{{ $t('LOGIN') }} <i class="fa fa fa-sign-in" @click="login"></i></div>
       </template>
     </template>
-    <Modal :z-index="999" :reset-drag-position="true" v-model="switchUserModal" sticky :draggable="true" :title="$t('COMMON_TEXT_SWITCH_USER')" @on-ok="confirmSwitchUser">
+    <!-- <Modal :z-index="999" :reset-drag-position="true" v-model="switchUserModal" sticky :draggable="true" :title="$t('COMMON_TEXT_SWITCH_USER')" @on-ok="confirmSwitchUser">
       <FormRow :fieldNameArr="[$t('LOGIN_ACCOUNT')]">
         <Input v-model="switchUserName" v-upper-case slot="a" />
       </FormRow>
-    </Modal>
+    </Modal> -->
   </vue-navigation-bar>
 </template>
 
@@ -67,32 +66,7 @@ export default {
     },
     changeLang() {
       this.setLanguage(this.locale)
-      this.$buildMenuPage(this, this.menuPages)
-      if (this.$router.history.current.fullPath.includes("/account/maintain")) {
-        this.$router.push("/home", () => {})
-      }
-    },
-    confirmSwitchUser() {
-      this.toggleLoading(true)
-      this.$authHttp.put("switch-user", JSON.stringify({
-          username: this.switchUserName
-        }))
-        .then((response) => {
-          this.toggleLoading(false)
-          this.switchUserName = ""
-          setCookie(process.env.VUE_APP_AUTH_TOKEN_NAME, response.data.access_token, 1000 * 60 * 60 * 5)
-          this.setGroupCode(null)
-          this.$readUserDetail(this)
-        })
-        .catch((error) => {
-          let text = this.$buildErrorMessage(error)
-          this.$Swal.fire({
-            icon: "error",
-            title: Translate("COMMON_MESSAGE_ERROR"),
-            text,
-          })
-        })
-    },
+    }
   },
   data() {
     return {
@@ -111,9 +85,6 @@ export default {
     }
   },
   watch: {
-    menuPages(val, oldVal) {
-      this.$buildMenuPage(this, val)
-    },
     menuOptionsLeft(val, oldVal) {
       this.navbarOptions.menuOptionsLeft = val
     },

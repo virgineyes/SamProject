@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-cloak>
     <Header></Header>
-    <article class="ec-container">
+    <article class="wanna-container">
       <div class="main_wrapper">
         <router-view :key="componentKey" />
       </div>

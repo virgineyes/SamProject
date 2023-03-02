@@ -1,7 +1,6 @@
 <template>
   <div>
     <Button size="large" @click="backHome"> <Icon type="ios-home-outline" />Back to home</Button>
-
     <Button size="large" @click="backPrev">Back to last page({{ second }}s)</Button>
   </div>
 </template>

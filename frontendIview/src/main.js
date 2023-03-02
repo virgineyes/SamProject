@@ -63,58 +63,6 @@ Vue.prototype.$buildErrorMessage = function(error) {
   return text
 }
 
-Vue.prototype.$buildMenuPage = function(vueInstance, userPages) {
-  var tempPages = Object.assign([], userPages)
-  let menuOptionsLeft = []
-
-  menu.forEach(tree => {
-    let subMenuOptions = []
-    tree.children.forEach(page => {
-      if (tempPages.some(userPage => userPage===page.code)) {
-        subMenuOptions.push({
-          type: "link",
-          text: vueInstance.$t(page.name),
-          path: { name: `${page.path}` },
-          iconLeft: `<i class="fa ${page.icon}"></i>`,
-        })
-      }
-    })
-
-    if (subMenuOptions.length > 0) {
-      menuOptionsLeft.push({
-        type: "link",
-        text: vueInstance.$t(tree.name),
-        subMenuOptions,
-      })
-    }
-  })
-  vueInstance.setMenuOptionsLeft(menuOptionsLeft)
-}
-
-Vue.prototype.$readUserDetail = function(vueInstance) {
-  console.log("XX")
-  vueInstance.toggleLoading(true)
-  vueInstance.$authHttp
-    .get("current-user")
-    .then((response) => {
-      vueInstance.toggleLoading(false)
-      vueInstance.setUserProfile(response.data)
-    })
-    .catch((error) => {
-      console.log(error.response)
-      vueInstance.toggleLoading(false)
-      vueInstance.setLogin(false)
-      delCookie(process.env.VUE_APP_AUTH_TOKEN_NAME)
-      if (error.response.status===444) {
-        let text = vueInstance.$buildErrorMessage(error)
-        vueInstance.$Swal.fire({
-          icon: "error",
-          title: Translate("COMMON_MESSAGE_ERROR"),
-          text,
-        })
-      }
-    })
-}
 
 Vue.prototype.$authHttp = authAxiosInstance
 Vue.prototype.$Swal = Swal

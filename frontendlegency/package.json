@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 3000",
     "qas": "vue-cli-service serve --mode qas",
     "stg": "vue-cli-service serve --mode stg",
     "build": "vue-cli-service build",

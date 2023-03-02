@@ -1,19 +1,13 @@
 <template>
-  <div>
-    <div class="home-page">
-      <img class="logout-img" src="@/assets/home-page.svg" v-if="!isLogin"/>
-      <Carousel autoplay :autoplay-speed="20000" loop v-model="value" v-if="isLogin">
-        <CarouselItem>
-          <img class="login-img" src="@/assets/login-home-page1.png"/>
-        </CarouselItem>
-        <CarouselItem>
-          <img class="login-img" src="@/assets/login-home-page2.png"/>
-        </CarouselItem>
-      </Carousel>
+  <div class="content">
+    <div class="flex-container" v-if="isLogin"> 
+      <img class="flex-item" width="200" height="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/01_of_spades_A.svg/800px-01_of_spades_A.svg.png">
+      <div class="flex-column-container">
+        <span class="flex-item" style="font-size:56px;">{{ account }}</span>
+        <span class="flex-item" style="font-size:36px;">Coin: 1000$</span>
+        <span class="flex-item" style="font-size:36px;">Rank: 骨灰級人物</span>
+      </div>
     </div>
-    <h1>
-      Hello  {{account}}
-    </h1>
   </div>
 </template>
 
@@ -110,13 +104,28 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 </script>
 
 <style scoped>
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1% 4%;
+}
+.flex-item {
+  padding: 0px 5px;
+}
+.flex-column-container {
+  display: flex;
+  flex-direction:column;
+	flex-wrap:wrap;
+  align-items: flex-start
+}
+
 .logout-img {
-  height: 55vh;
+  height: 70vh;
   width: 100%;
 }
 
 .login-img {
-  height: 35vh;
+  height: 70vh;
   width: 100%;
 }
 
@@ -134,6 +143,7 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 
 .content {
   width: 100%;
+  height: 100vh;
   display: inline-block;
 }
 

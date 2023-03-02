@@ -2,7 +2,7 @@ import Vue from "vue"
 import Router from "vue-router"
 
 import store from "@/store/index"
-import Home from "@/views/default/Home"
+import Home from "@/views/common/Home"
 import GetToken from "@/views/default/GetToken"
 import Error from "@/views/default/Error"
 import * as types from '@/store/mutations_types.js'
@@ -70,13 +70,9 @@ router.beforeEach((to, from, next) => {
     } else {
       store.commit(types.LOGIN, false)
       if (Number(getCookie("LOGIN-ACCOUNT")) < 3) {
-        if (process.env.VUE_APP_IS_ON_EXTERNAL==="T") {
-          window.location.href = `${process.env.VUE_APP_AUTH_URL}#/auth/login?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#` + to.path)
-        } else {
-          window.location.href = `${process.env.VUE_APP_AUTH_URL}api/auth/redirect?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#` + to.path)
-        } 
+
       } else {
-        window.location.href = `${process.env.VUE_APP_AUTH_URL}#/auth/login?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#` + to.path)
+     
       }
     }
   }

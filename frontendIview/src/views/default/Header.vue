@@ -1,30 +1,40 @@
 <template>
   <header class="fixed-top">
-    <div class="navbar navbar-expand-lg navbar-light bg-delta-blue">
+    <div class="navbar navbar-expand-lg navbar-light bg-delta-gold">
       <div class="container-fluid">
-        <a class="navbar-brand text-white" href="javascript:void(0)" @click="router('home')">
-          <img class="logo" src="@/assets/logo_w.svg" style="margin-bottom:6px"/>
-          <span class="logoTilt" style="font-size:24px;">{{ $t('COMMON_TITLE') }}</span>
+        <a class="navbar-brand" href="javascript:void(0)" @click="router('home')">
+          <span class="logoTilt" style="font-size:32px;" >{{ $t('COMMON_TITLE') }}</span>
         </a>
 
         <div v-if="isLogin">
           <ul class="navbar-nav" v-show="!isSmallDevice">
+            <a class="nav-item" href="javascript:void(0)" @click="router('about')">
+              <span class="logoTilt" style="font-size:24px; color:black" >About</span>
+            </a>
+            <a class="nav-item" href="javascript:void(0)" @click="router('class')">
+              <span class="logoTilt" style="font-size:24px; color:black" >課程</span>
+            </a>
+            <a class="nav-item" href="javascript:void(0)" @click="router('calendar')">
+              <span class="logoTilt" style="font-size:24px; color:black" >課程行事曆</span>
+            </a>
+            <a class="nav-item" href="javascript:void(0)" @click="router('about')">
+              <span class="logoTilt" style="font-size:24px; color:black" >線上商城</span>
+            </a>
             <li class="nav-item">
-              <Select v-model="locale" @on-change="changeLang" style="width: 100px">
+              <Select v-model="locale" @on-change="changeLang" style="width: 100px;">
                 <Option value="zh-TW">繁體中文</Option>
                 <Option value="en">English</Option>
-                <Option value="zh-CN">简体中文</Option>
               </Select>
             </li>
             <li class="nav-item cursor">
               <Dropdown @on-click="authControl($event)" style="margin-left: 18px">
-                <Button type="default" ghost style="width: 280px; font-size:18px;" >
+                <Button type="default" ghost style="width: 200px; font-size:18px;" >
                   {{ account }}
                   <Icon type="ios-arrow-down"></Icon>
                 </Button>
                 <DropdownMenu slot="list">
+                  <DropdownItem name="personalDetail" style="font-size:24px;">個人資料</DropdownItem>
                   <DropdownItem name="logout" style="font-size:24px;">{{ $t('COMMON_TEXT_LOGOUT') }}</DropdownItem>
-                  <DropdownItem v-if="isSystemAdmin" name="switchUser" style="font-size:24px;">{{ $t('COMMON_TEXT_SWITCH_USER') }}</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </li>
@@ -32,18 +42,18 @@
         </div>
         <div v-if="!isLogin">
           <ul class="navbar-nav">
-            <li class="nav-item text-white logoinUser login" @click="login"><p style="font-size:18px; margin-top:8px">{{ $t('LOGIN') }}</p></li>
+            <li class="nav-item logoinUser login" @click="login"><p style="font-size:18px; margin-top:8px">{{ $t('LOGIN') }}</p></li>
             <li class="nav-item cursor" @click="login"><i class="fa fa-3x fa-sign-in" style="align-content: center;"></i></li>
           </ul>
         </div>
       </div>
     </div>
     <NavigationBar v-if="isLogin"></NavigationBar>
-    <Modal :z-index="999" :reset-drag-position="true" v-model="switchUserModal" sticky :draggable="true" :title="$t('COMMON_TEXT_SWITCH_USER')" @on-ok="confirmSwitchUser">
+    <!-- <Modal :z-index="999" :reset-drag-position="true" v-model="switchUserModal" sticky :draggable="true" :title="$t('COMMON_TEXT_SWITCH_USER')" @on-ok="confirmSwitchUser">
       <FormRow :fieldNameArr="[$t('LOGIN_ACCOUNT')]">
         <Input v-model="switchUserName" v-upper-case slot="a" />
       </FormRow>
-    </Modal>
+    </Modal> -->
   </header>
 </template>
 
@@ -68,18 +78,16 @@ export default {
   },
   created() {
     if (getCookie(process.env.VUE_APP_AUTH_TOKEN_NAME) && JSON.stringify(this.getUserProfile().user)==="{}") {
-      this.$readUserDetail(this)
+
     }
   },
   methods: {
-    ...mapGetters(["getSmallDevice", "getLogin", "getUserProfile", "getLanguage", "getGroupCode"]),
-    ...mapActions(["setLanguage", "setLogin", "setUserProfile", "setGroupCode", "toggleLoading", "setMenuOptionsLeft"]),
+    ...mapGetters(["getSmallDevice", "getLogin", "getUserProfile", "getLanguage"]),
+    ...mapActions(["setLanguage", "setLogin", "setUserProfile", "toggleLoading", "setMenuOptionsLeft"]),
     router(path) {
       this.$router.push(`/${path}`, () => {})
     },
     changeLang() {
-      this.setLanguage(this.locale)
-      this.$buildMenuPage(this, this.menuPages)
       this.setLanguage(this.locale)
       if (this.$router.history.current.fullPath.includes("/account/maintain")) {
         this.$router.push("/home", () => {})
@@ -96,40 +104,13 @@ export default {
         this.switchUserModal = true
       }
     },
-    confirmSwitchUser() {
-      this.toggleLoading(true)
-      this.$authHttp.put("switch-user", JSON.stringify({
-          username: this.switchUserName
-        }))
-        .then((response) => {
-          this.toggleLoading(false)
-          this.switchUserName = ""
-          setCookie(process.env.VUE_APP_AUTH_TOKEN_NAME, response.data.access_token, 1000 * 60 * 60 * 5)
-          this.setGroupCode(null)
-          this.$readUserDetail(this)
-        })
-        .catch((error) => {
-          let text = this.$buildErrorMessage(error)
-          this.$Swal.fire({
-            icon: "error",
-            title: Translate("COMMON_MESSAGE_ERROR"),
-            text,
-          })
-        })
-    },
-    systemAdminLogin(action) {
-      if (action==="manualLogin") {
-        window.location.href = `${process.env.VUE_APP_AUTH_URL}#/auth/login?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#/home`) 
-      } else if (action==="autoLogin") {
-        window.location.href = `${process.env.VUE_APP_AUTH_URL}api/auth/redirect?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#/home`)
-      }
-    },
     login() {
-      if (process.env.VUE_APP_IS_ON_EXTERNAL==="T") {
-        window.location.href = `${process.env.VUE_APP_AUTH_URL}#/auth/login?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#/home`)
-      } else {
-        window.location.href = `${process.env.VUE_APP_AUTH_URL}api/auth/redirect?redirectUrl=` + encodeURIComponent(`${process.env.VUE_APP_FRONTEND_URL}/#/home`)
-      } 
+      this.setLogin(true)
+      this.setUserProfile({
+        user: {
+          username: 'Ace.Chiu'
+        }
+      })
     },
   },
   computed: {
@@ -145,18 +126,6 @@ export default {
     account() {
       return this.getUserProfile().user.username
     },
-    isSystemAdmin() {
-      return this.getUserProfile() && this.getUserProfile().systemRoles && this.getUserProfile().systemRoles.includes('SYSTEM_ADMIN')
-    },
-    groupCode: {
-      get() {
-        return this.getGroupCode() ? this.getGroupCode().code : ""
-      },
-      set(val){}
-    },
-    isExternal() {
-      return process.env.VUE_APP_IS_ON_EXTERNAL==="T"
-    }
   },
   mounted() {
     if (navigator.language.startsWith("en")) {
