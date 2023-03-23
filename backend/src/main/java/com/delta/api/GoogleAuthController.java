@@ -1,7 +1,5 @@
 package com.delta.api;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -57,18 +55,9 @@ public class GoogleAuthController {
   
   @ApiOperation(value = "使用 Token 拿 User Data")
   @GetMapping(value = ResourcePaths.GOOGLE_AUTH + "/getUserProfile/{token}")
-  public GoogleUserPerfileResponse getUserProfile(@ApiParam(value = "token") @PathVariable String token) {
+  public UserProfile getUserProfile(@ApiParam(value = "token") @PathVariable String token) {
     log.info("token: " + token);
     GoogleUserPerfileResponse response = restTemplate.getForObject("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token={token}", GoogleUserPerfileResponse.class, token);
-    UserProfile userProfile = userProfileService.findByGoogleId(response.getId());
-    if (Objects.isNull(userProfile)) {
-      userProfile = new UserProfile();
-      userProfile.setGoogleId(response.getId());
-      userProfile.setGiven_name(response.getGiven_name());
-      userProfile.setFamily_name(response.getFamily_name());
-      userProfileService.save(userProfile);
-    }
-    
-    return response;
+    return userProfileService.create(response);
   }
 }

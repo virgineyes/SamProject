@@ -5,6 +5,9 @@ package com.delta.exception;
  * @create: 2022-06-30
  */
 public abstract class AbstractDeltaException extends RuntimeException {
+
+  private static final long serialVersionUID = -1704508525572788612L;
+
   public AbstractDeltaException() {
     super();
   }

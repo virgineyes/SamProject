@@ -1,13 +1,15 @@
 package com.delta.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.delta.dto.UserProfileDto;
 import com.delta.entity.UserProfile;
-import com.delta.exception.SystemDataExistsException;
 import com.delta.repository.BasicJpaRepository;
 import com.delta.repository.UserProfileRepository;
+import com.delta.request.GoogleUserPerfileResponse;
 
 /**
  * @author: ACE.CHIU
@@ -17,34 +19,35 @@ import com.delta.repository.UserProfileRepository;
 @Service
 public class UserProfileService extends BasicService<UserProfile> {
 
-	@Autowired
-	private UserProfileRepository repository;
+  @Autowired
+  private UserProfileRepository repository;
+  
+  public UserProfile create(GoogleUserPerfileResponse response) {
+    UserProfile userProfile = repository.findByGoogleId(response.getId()).orElse(new UserProfile());
+    userProfile.setGoogleId(response.getId());
+    userProfile.setGiven_name(response.getGiven_name());
+    userProfile.setFamily_name(response.getFamily_name());
+    return repository.save(userProfile);
+  }
 
-	public UserProfile update(UserProfileDto userProfileDto) {
-	    UserProfile userProfile = repository.findByEmail(userProfileDto.getEmail()).orElse(new UserProfile());
-		if (userProfile == null) {
-		  throw new SystemDataExistsException("This account is not exist: " + userProfileDto.getEmail());
-		} else {
-		  userProfile.setAddress(userProfileDto.getAddress());
-		  userProfile.setBirthday(userProfileDto.getBirthday());
-		  userProfile.setGuardianEmail(userProfileDto.getGuardianEmail());
-		  userProfile.setGuardianName(userProfileDto.getGuardianName());
-		  userProfile.setGuardianPhone(userProfileDto.getGuardianPhone());
-		  userProfile.setSchool(userProfileDto.getSchool());
-		  return repository.save(userProfile);
-		}
-	}
+  public UserProfile update(UserProfileDto userProfileDto) {
+    UserProfile userProfile = repository.findByEmail(userProfileDto.getEmail())
+        .orElse(new UserProfile());
+    userProfile.setBirthday(userProfileDto.getBirthday());;
+    return repository.save(userProfile);
 
-	public UserProfile findByEmail(String email) {
-		return repository.findByEmail(email).orElse(null);
-	}
-	
-    public UserProfile findByGoogleId(String googleId) {
-      return repository.findByGoogleId(googleId).orElse(null);
-    }	
-    
-	@Override
-	public BasicJpaRepository<UserProfile> getRepository() {
-		return repository;
-	}
+  }
+
+  public Optional<UserProfile> findByEmail(String email) {
+    return repository.findByEmail(email);
+  }
+
+  public  Optional<UserProfile> findByGoogleId(String googleId) {
+    return repository.findByGoogleId(googleId);
+  }
+
+  @Override
+  public BasicJpaRepository<UserProfile> getRepository() {
+    return repository;
+  }
 }

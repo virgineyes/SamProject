@@ -13,14 +13,16 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+
 /**
  * @author: ACE.CHIU
- * @create: 2022-07-03
+ * @create: 2023-03-19
  */
 @Entity
-@ApiModel(value = "Teacher", description = "老師")
-public class Teacher extends BaseEntity {
-  private static final long serialVersionUID = -66606257433452604L;
+@ApiModel(value = "Student", description = "學生")
+public class Student extends BaseEntity {
+
+  private static final long serialVersionUID = 1651345380729541023L;
 
   @Getter
   @Setter
@@ -30,18 +32,23 @@ public class Teacher extends BaseEntity {
   
   @Getter
   @Setter
-  @ApiModelProperty(value = "照片")
-  private String imgUrl;  
+  @ApiModelProperty(value = "學校名稱")
+  private String school;
   
   @Getter
   @Setter
-  @ApiModelProperty(value = "技能")
-  private String skill;
+  @ApiModelProperty(value = "監護人姓名")
+  private String guardianName;
+
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "監護人連絡電話")
+  private String guardianPhone;
   
   @Getter
   @Setter
-  @ApiModelProperty(value = "經歷")
-  private String experience;  
+  @ApiModelProperty(value = "監護人連絡Email")
+  private String guardianEmail;
   
   @Getter
   @ApiModelProperty(value = "課程")

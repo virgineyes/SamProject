@@ -1,6 +1,12 @@
 package com.delta.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,43 +19,55 @@ import lombok.Setter;
  * @create: 2022-06-30
  */
 @Entity
-@Getter 
-@Setter
 @ApiModel(value = "User Profile", description = "使用者資調")
 public class UserProfile extends BaseEntity {
 
   private static final long serialVersionUID = 3138912709489043965L;
   
+  @Getter
+  @Setter
   @ApiModelProperty(value = "GOOGLE ID")
   private String googleId;
 
+  @Getter
+  @Setter
   @ApiModelProperty(value = "姓氏")
   private String family_name;
   
+  @Getter
+  @Setter
   @ApiModelProperty(value = "名子")
   private String given_name;
   
+  @Getter
+  @Setter
   @ApiModelProperty(value = "生日")
   private String birthday;
   
+  @Getter
+  @Setter
   @ApiModelProperty(value = "Email")
   private String email;
   
-  @ApiModelProperty(value = "學校名稱")
-  private String school;
-  
+  @Getter
+  @Setter
   @ApiModelProperty(value = "電話")
   private String phone;
   
-  @ApiModelProperty(value = "監護人姓名")
-  private String guardianName;
-
-  @ApiModelProperty(value = "監護人連絡電話")
-  private String guardianPhone;
-  
-  @ApiModelProperty(value = "監護人連絡Email")
-  private String guardianEmail;
-  
+  @Getter
+  @Setter
   @ApiModelProperty(value = "連絡地址")
   private String address;
+  
+  @Getter
+  @Setter
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ApiModelProperty(value = "學生")
+  private Student student;
+  
+  @Getter
+  @Setter
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ApiModelProperty(value = "教練")
+  private Teacher teacher;
 }

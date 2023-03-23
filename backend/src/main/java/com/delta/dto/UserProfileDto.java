@@ -10,8 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserProfileDto {
+  
+  private String googleId;
+  
+  private String family_name;
 
-  private String name;
+  private String given_name;
   
   private String birthday;
   
@@ -20,12 +24,6 @@ public class UserProfileDto {
   private String school;
   
   private String phone;
-  
-  private String guardianName;
-
-  private String guardianPhone;
-  
-  private String guardianEmail;
   
   private String address;
 }

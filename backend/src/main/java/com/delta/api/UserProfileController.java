@@ -35,17 +35,17 @@ public class UserProfileController {
   @ApiOperation(value = "根據 groupId 搜尋使用者")
   @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/goolgeId/{googleId}")
   public UserProfile findByGooldId(@ApiParam(value = "googleId") @PathVariable String googleId) {
-    return userProfileService.findByGoogleId(googleId);
+    return userProfileService.findByGoogleId(googleId).orElse(null);
   }
   
   @ApiOperation(value = "根據 email 搜尋使用者")
   @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/email/{email}")
   public UserProfile findByEmail(@ApiParam(value = "email") @PathVariable String email) {
-    return userProfileService.findByEmail(email);
+    return userProfileService.findByEmail(email).orElse(null);
   }
   
   @ApiOperation(value = "維護使用者")
-  @PostMapping(value = ResourcePaths.USER_PROFILE + "/update")
+  @PostMapping(value = ResourcePaths.USER_PROFILE + "/upseart")
   public UserProfile update(@RequestBody UserProfileDto userProfileDto) {
     return userProfileService.update(userProfileDto);
   }
