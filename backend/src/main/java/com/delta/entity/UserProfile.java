@@ -32,12 +32,12 @@ public class UserProfile extends BaseEntity {
   @Getter
   @Setter
   @ApiModelProperty(value = "姓氏")
-  private String family_name;
+  private String familyName;
   
   @Getter
   @Setter
   @ApiModelProperty(value = "名子")
-  private String given_name;
+  private String givenName;
   
   @Getter
   @Setter

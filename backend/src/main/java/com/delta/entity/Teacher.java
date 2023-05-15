@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.delta.common.ClarifyEnum;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -42,6 +44,22 @@ public class Teacher extends BaseEntity {
   @Setter
   @ApiModelProperty(value = "經歷")
   private String experience;  
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "所屬公司")
+  private String partOfCompany; 
+  
+  /*
+   *  尚未認證，測試中，驗證成功
+   *  測試中可以開課，但只能開體驗課
+   *  驗證成功，所有客都可以開
+   */
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "認證")
+  private ClarifyEnum clarify;
   
   @Getter
   @ApiModelProperty(value = "課程")

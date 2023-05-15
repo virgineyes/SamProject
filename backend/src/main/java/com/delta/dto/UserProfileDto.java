@@ -13,17 +13,11 @@ public class UserProfileDto {
   
   private String googleId;
   
-  private String family_name;
+  private String familyName;
 
-  private String given_name;
+  private String givenName;
   
   private String birthday;
   
   private String email;
-  
-  private String school;
-  
-  private String phone;
-  
-  private String address;
 }

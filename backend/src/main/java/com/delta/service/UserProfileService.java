@@ -25,11 +25,21 @@ public class UserProfileService extends BasicService<UserProfile> {
   public UserProfile create(GoogleUserPerfileResponse response) {
     UserProfile userProfile = repository.findByGoogleId(response.getId()).orElse(new UserProfile());
     userProfile.setGoogleId(response.getId());
-    userProfile.setGiven_name(response.getGiven_name());
-    userProfile.setFamily_name(response.getFamily_name());
+    userProfile.setGivenName(response.getGiven_name());
+    userProfile.setFamilyName(response.getFamily_name());
     return repository.save(userProfile);
   }
 
+  public UserProfile create(UserProfileDto dto) {
+    UserProfile userProfile = new UserProfile();
+    userProfile.setGoogleId(dto.getGoogleId());
+    userProfile.setFamilyName(dto.getFamilyName());
+    userProfile.setGivenName(dto.getGivenName());
+    userProfile.setBirthday(dto.getBirthday());
+    userProfile.setEmail(dto.getEmail());
+    return repository.save(userProfile);
+  }
+  
   public UserProfile update(UserProfileDto userProfileDto) {
     UserProfile userProfile = repository.findByEmail(userProfileDto.getEmail())
         .orElse(new UserProfile());

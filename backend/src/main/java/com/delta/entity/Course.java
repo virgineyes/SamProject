@@ -1,6 +1,6 @@
 package com.delta.entity;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -45,10 +45,9 @@ public class Course extends BaseEntity {
   @ApiModelProperty(value = "課程內容")
   private String content;
   
-  @Getter
-  @Setter
-  @ApiModelProperty(value = "課程時間")
-  private LocalDateTime time;
+  /*
+   * Calender
+   */
   
   @Getter
   @Setter
@@ -59,4 +58,18 @@ public class Course extends BaseEntity {
   @Setter
   @ApiModelProperty(value = "地址")
   private String address;
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "課程類型")
+  private String type;
+ 
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "課程價錢")
+  private BigDecimal money;
+  
+  /*
+   * 還需要有一個付款的 Table
+   */
 }

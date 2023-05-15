@@ -1,20 +1,19 @@
-package com.delta.request;
+package com.delta.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * @author: ACE.CHIU
- * @create: 2023-03-19
+ * @create: 2023-03-23
  */
 @Getter
 @Setter
-public class TeacherDtoRequest {
-  
-  private String googleId;
-  private String email;
-  private String uuid;
+public class TeacherDto {
+
   private String imgUrl;
+  
   private String skill;
+  
   private String experience;
 }

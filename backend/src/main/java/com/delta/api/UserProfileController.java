@@ -27,10 +27,12 @@ public class UserProfileController {
 
   @Autowired
   private UserProfileService userProfileService;
-
-//  @Autowired
-//  private UserProfileResourceAssembler assembler;
   
+  @ApiOperation(value = "新增一個 User")
+  @GetMapping(value = ResourcePaths.USER_PROFILE + "/create")
+  public UserProfile create(@RequestBody UserProfileDto userProfileDto) {
+    return userProfileService.create(userProfileDto);
+  }
   
   @ApiOperation(value = "根據 groupId 搜尋使用者")
   @GetMapping(value = ResourcePaths.USER_PROFILE + "/find/goolgeId/{googleId}")
