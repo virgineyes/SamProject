@@ -1,0 +1,22 @@
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
+  variables:
+    CI_COMMIT_TAG: 'test1'
+    CI_REGISTRY: 'it-docker.deltaww.com'
+    CI_REGISTRY_IMAGE: 'it-docker.deltaww.com/elementplusvitestarter'
+    CI_REGISTRY_USER: 'docker.itmdev'
+    CI_REGISTRY_PASSWORD: 'QqIlB1NoZeDjwrpQ'
+  # before_script:
+  #   - docker login it-docker.deltaww.com -u docker.devops -p QqIlB1NoZeDjwrpQ
+  script:
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - cat /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+  rules:
+    - if: $CI_COMMIT_TAG

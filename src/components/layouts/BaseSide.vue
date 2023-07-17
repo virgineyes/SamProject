@@ -45,7 +45,7 @@ import {
   Location,
   Document,
   Menu as IconMenu,
-  Setting,
+  Setting
 } from '@element-plus/icons-vue'
 
 const isCollapse = ref(true)
@@ -56,4 +56,3 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 </script>
-
