@@ -16,7 +16,6 @@ import {
 
 const pathSrc = path.resolve(__dirname, 'src')
 
-
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
@@ -38,18 +37,7 @@ export default ({ mode }) => {
       eslintPlugin({ cache: false }), // 新增這行
       Components({
         // allow auto load markdown components under `./src/components/`
-        extensions: [
-          '.mjs',
-          '.js',
-          '.ts',
-          '.jsx',
-          '.tsx',
-          '.json',
-          '.vue',
-          '.scss',
-          'vue',
-          'md'
-        ],
+        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.scss', 'vue', 'md'],
         // allow auto import and register components used in markdown
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
@@ -74,9 +62,12 @@ export default ({ mode }) => {
         transformers: [transformerDirectives(), transformerVariantGroup()]
       })
     ],
-    base: process.env.VITE_USER_NODE_ENV === 'ghpage' ? 'https://github.deltaww.com/pages/ITMfgSuptDev/element-plus-vite-starter/' : '',
+    base:
+      process.env.VITE_USER_NODE_ENV === 'ghpage'
+        ? 'https://github.deltaww.com/pages/ITMfgSuptDev/element-plus-vite-starter/'
+        : '',
     build: {
-      outDir: process.env.VITE_USER_NODE_ENV === 'ghpage' ? './build' : './dist',
+      outDir: process.env.VITE_USER_NODE_ENV === 'ghpage' ? './build' : './dist'
     },
     define: {
       'process.env': process.env
