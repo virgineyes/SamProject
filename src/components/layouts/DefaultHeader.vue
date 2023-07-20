@@ -22,7 +22,7 @@
         href="javascript:void(0)"
         @click="$router.push('/home')"
       >
-        <img class="default-header__logo" src="src\assets\logo_w.svg" />
+        <img class="default-header__logo" src="../../assets/logo_w.svg" />
         <span v-if="isDesktop">System Name</span>
       </a>
     </div>
