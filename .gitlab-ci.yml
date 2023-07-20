@@ -11,12 +11,11 @@ build:
   #   - docker login it-docker.deltaww.com -u docker.devops -p QqIlB1NoZeDjwrpQ
   script:
     - DATE=`date '+%Y%m%d.%H%M%S'`
-    - CI_COMMIT_SHA_ABBREV=`cut -c 1-7 <<<${CI_COMMIT_SHA}`
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA}"
+      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
   rules:
     - if: $CI_COMMIT_SHA
