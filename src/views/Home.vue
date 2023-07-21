@@ -12,9 +12,6 @@ defineComponent({
 })
 </script>
 <style lang="scss">
-.home {
-  min-height: 100%;
-}
 .element-plus-logo {
   width: 50%;
 }

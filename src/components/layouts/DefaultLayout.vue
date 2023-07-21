@@ -9,6 +9,7 @@
         <el-header class="header">
           <DefaultHeader @menuOpen="getCollapsingStatus" />
         </el-header>
+        <NavigationHeader v-if="isDesktop"></NavigationHeader>
         <el-container>
           <el-main class="main">
             <slot />
@@ -27,6 +28,7 @@ import { ref, computed } from 'vue'
 import DefaultHeader from './DefaultHeader.vue'
 import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
 import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
+import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
 
 const menuOpen = ref(false)
 
