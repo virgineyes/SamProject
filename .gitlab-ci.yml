@@ -2,7 +2,7 @@ build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
-    entrypoint: [""]
+    entrypoint: ['']
   variables:
     CI_REGISTRY: 'it-docker.deltaww.com'
     CI_REGISTRY_USER: 'docker.itmdev'

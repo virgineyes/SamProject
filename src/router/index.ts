@@ -5,9 +5,10 @@ import {
   Router,
   RouteRecordRaw
 } from 'vue-router'
-import store from '../store'
 import Cookies from 'js-cookie'
-import { AuthMutations } from '~/store/modules/auth/mutations'
+import pinia from '../store/store'
+import { base } from '../store/base'
+const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'home', component: () => import('../views/Home.vue') },
@@ -43,10 +44,7 @@ router.beforeEach((to, from, next) => {
     })
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    store.commit(
-      'auth/' + AuthMutations.SET_TOKEN,
-      Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
-    )
+    baseI.setToken(Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME))
     next()
   } else {
     // Home 不需要登入(大寫區分 Redirect )

@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import router from './router'
-import store from './store'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import Cookies from 'js-cookie'
 import axios, { AxiosError } from 'axios'
+import pinia from './store/store'
 // or use cdn, uncomment cdn link in `index.html`
 
 import './styles/index.scss'
@@ -31,9 +31,8 @@ const axiosInstance = (
 
   instance.interceptors.request.use(
     (config) => {
-      config.headers['Accept-Language'] = store.getters.getLanguage
-      config.headers.Authorization =
-        'Bearer ' + Cookies.get(process.env.VUE_APP_AUTH_TOKEN_NAME)
+      // config.headers['Accept-Language'] = store.getters.getLanguage
+      config.headers.Authorization = 'Bearer ' + Cookies.get(process.env.VUE_APP_AUTH_TOKEN_NAME)
       config.headers['Content-Type'] = 'application/json'
       // store.commit(types.LOADING, true)
       return config
@@ -53,10 +52,7 @@ const axiosInstance = (
         return Promise.reject(error)
       }
 
-      if (
-        error.response.status !== 444 &&
-        condtionPopMessageWhenNotError(error)
-      ) {
+      if (error.response.status !== 444 && condtionPopMessageWhenNotError(error)) {
         return Promise.reject(error)
       }
       return Promise.reject(error)
@@ -92,4 +88,6 @@ const authAxiosInstance = axiosInstance(
 const app = createApp(App)
 app.config.globalProperties.$authAxios = { ...authAxiosInstance }
 app.use(ElementPlus)
-app.use(router).use(store).mount('#app')
+app.use(pinia)
+app.use(router)
+app.mount('#app')
