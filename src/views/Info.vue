@@ -72,32 +72,32 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, defineComponent } from 'vue'
+  import { reactive, defineComponent } from 'vue'
 
-// do not use same name with ref
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: ''
-})
-defineComponent({
-  name: 'info-view'
-})
-const onSubmit = () => {
-  console.log('submit!')
-}
-</script>
-<style>
-.text {
-  font-size: 14px;
-}
+  // do not use same name with ref
+  const form = reactive({
+    name: '',
+    region: '',
+    date1: '',
+    date2: '',
+    delivery: false,
+    type: [],
+    resource: '',
+    desc: ''
+  })
+  defineComponent({
+    name: 'info-view'
+  })
+  const onSubmit = () => {
+    console.log('submit!')
+  }
+  </script>
+  <style>
+  .text {
+    font-size: 14px;
+  }
 
-.item {
-  margin-bottom: 18px;
-}
+  .item {
+    margin-bottom: 18px;
+  }
 </style>
