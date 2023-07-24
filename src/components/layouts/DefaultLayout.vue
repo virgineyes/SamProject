@@ -46,8 +46,7 @@ function getCollapsingStatus(status: boolean) {
   box-shadow: 0 0 10px rgba(#000, 0.1);
   overflow: auto;
 }
-.header,
-.footer {
+.header {
   background-color: #0087dc;
   line-height: 60px;
   text-align: center;
@@ -59,10 +58,10 @@ function getCollapsingStatus(status: boolean) {
   padding: 32px 24px;
 }
 .footer {
-  p {
-    color: white;
-    line-height: 60px;
-  }
+  background-color: #e0e0e0;
+  height: unset;
+  text-align: center;
+  font-size: 12px;
 }
 .desktop-aside-menu {
   @media (max-width: 767.98px) {
