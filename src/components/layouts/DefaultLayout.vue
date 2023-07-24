@@ -5,12 +5,12 @@
         <DesktopAsideMenu :menuOpen="menuOpen"></DesktopAsideMenu>
         <MobileAsideMenu @closed="menuOpen = false" :menuOpen="menuOpen"></MobileAsideMenu>
       </el-aside>
-      <el-container>
+      <el-container class="container">
         <el-header class="header">
           <DefaultHeader @menuOpen="getCollapsingStatus" />
         </el-header>
         <NavigationHeader></NavigationHeader>
-        <el-container>
+        <el-container class="container__main">
           <el-main class="main">
             <slot />
           </el-main>
@@ -38,13 +38,18 @@ function getCollapsingStatus(status: boolean) {
 </script>
 <style lang="scss" scoped>
 .layout {
-  min-height: 100vh;
+  height: 100vh;
+}
+.container {
+  height: 100vh;
+  &__main {
+    overflow-y: auto;
+  }
 }
 .aside {
   position: relative;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(#000, 0.1);
-  overflow: auto;
 }
 .header {
   background-color: #0087dc;
