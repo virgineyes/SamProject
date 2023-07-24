@@ -93,7 +93,7 @@ function changeCollapseStatus(bool: boolean) {
     &--close {
       color: #fff;
       @media (max-width: 767.98px) {
-        color: #0087dc;
+        color: basic.$delta-blue;
       }
     }
   }

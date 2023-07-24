@@ -1,10 +1,5 @@
 // import dark theme
 @use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
-
-// :root {
-//   --ep-color-primary: red;
-// }
-
 body {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -30,36 +25,6 @@ code {
 #app {
     text-align: center;
     color: var(--ep-text-color-primary);
-}
-/*#主色調，用於頭部、鏈接文字、重要性圖標、按鈕*/
-.bg-delta-blue {
-    background-color: #00a0e9; 
-    border-color: #0089c8;
-}
-/*#輔助色，用於標籤、圖標、按鈕等*/
-.bg-delta-green {
-    background-color: #4caf50; 
-}
-/*#小面積使用，錯誤提示，刪除、取消等*/
-.bg-delta-red {
-    background-color: #f44336; 
-}
-/*#輔助性文字、圖標等*/
-.bg-delta-grey {
-    background-color: #757575; 
-}
-.text-delta-blue {
-    color: #10b3ff;
-}
-/*#輔助色，用於標籤、圖標、按鈕等*/
-.text-delta-green {
-    color: #2cc231; 
-}
-.text-delta-red {
-    color: #f00;
-}
-.text-delta-grey {
-    color: #504f4f;
 }
 
 .ep-sub-menu__title {

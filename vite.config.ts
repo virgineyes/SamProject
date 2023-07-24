@@ -28,7 +28,8 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/styles/element/index.scss" as *;'
+          additionalData: `@use "~/styles/element/index.scss" as *;
+          @use "./src/styles/css/_variables.scss" as basic;`
         }
       }
     },
