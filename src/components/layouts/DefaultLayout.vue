@@ -2,12 +2,12 @@
   <div>
     <el-container class="layout">
       <el-aside class="aside" width="auto">
-        <DesktopAsideMenu :menuOpen="menuOpen"></DesktopAsideMenu>
-        <MobileAsideMenu @closed="menuOpen = false" :menuOpen="menuOpen"></MobileAsideMenu>
+        <DesktopAsideMenu></DesktopAsideMenu>
+        <MobileAsideMenu></MobileAsideMenu>
       </el-aside>
       <el-container class="container">
         <el-header class="header">
-          <DefaultHeader @menuOpen="getCollapsingStatus" />
+          <DefaultHeader />
         </el-header>
         <NavigationHeader></NavigationHeader>
         <el-container class="container__main">
@@ -23,18 +23,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import DefaultHeader from './DefaultHeader.vue'
 import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
 import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
 import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
-
-const menuOpen = ref(false)
-
-function getCollapsingStatus(status: boolean) {
-  menuOpen.value = status
-}
 </script>
 <style lang="scss" scoped>
 .layout {

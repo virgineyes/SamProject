@@ -2,7 +2,7 @@
   <el-menu
     default-active="1"
     class="desktop-aside-menu"
-    :collapse="!props.menuOpen"
+    :collapse="!baseStore.menuOpen"
     @open="handleOpen"
     @close="handleClose"
   >
@@ -67,13 +67,10 @@
 <script lang="ts" setup>
 import {} from 'vue'
 import { Location, Setting } from '@element-plus/icons-vue'
+import { base } from '../../store/base'
 
-const props = defineProps({
-  menuOpen: {
-    type: Boolean,
-    default: false
-  }
-})
+const baseStore = base()
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }

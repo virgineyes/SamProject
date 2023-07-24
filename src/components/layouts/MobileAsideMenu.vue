@@ -1,10 +1,14 @@
 <template>
   <div class="mobile-sidebar">
     <transition name="overlay">
-      <div v-show="props.menuOpen" class="mobile-sidebar__overlay" @click="menuToggle"></div>
+      <div
+        v-show="baseStore.menuOpen"
+        class="mobile-sidebar__overlay"
+        @click="baseStore.menuOpen = false"
+      ></div>
     </transition>
     <transition name="sidebar">
-      <div v-show="props.menuOpen" class="mobile-sidebar__main">
+      <div v-show="baseStore.menuOpen" class="mobile-sidebar__main">
         <el-menu default-active="1" class="el-menu-vertical-demo">
           <el-sub-menu index="1">
             <template #title>
@@ -68,17 +72,9 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  menuOpen: {
-    type: Boolean,
-    default: false
-  }
-})
-const emit = defineEmits(['closed'])
+import { base } from '../../store/base'
 
-function menuToggle() {
-  emit('closed', true)
-}
+const baseStore = base()
 </script>
 
 <style lang="scss">

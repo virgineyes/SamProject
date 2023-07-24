@@ -6,7 +6,8 @@ export const base = defineStore('base', {
       token: '',
       loading: false,
       language: '',
-      user: {}
+      user: {},
+      menuOpen: false,
     }
   },
   getters: {

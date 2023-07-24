@@ -2,14 +2,14 @@
   <div class="default-header">
     <div class="default-header__left">
       <el-icon
-        v-show="!menuOpen"
+        v-show="!baseStore.menuOpen"
         class="default-header__hamburger"
         @click="changeCollapseStatus(true)"
         size="30px"
         ><Expand
       /></el-icon>
       <el-icon
-        v-show="menuOpen"
+        v-show="baseStore.menuOpen"
         class="default-header__hamburger default-header__hamburger--close"
         @click="changeCollapseStatus(false)"
         size="30px"
@@ -32,17 +32,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
 import DropdownLocal from '~/components/layouts/DropdownLocal.vue'
 import DropdownUser from '~/components/layouts/DropdownUser.vue'
 import { Expand, Fold } from '@element-plus/icons-vue'
+import { base } from '../../store/base'
 
-const menuOpen = ref(false)
-const emit = defineEmits(['menuOpen'])
+const baseStore = base()
 
 function changeCollapseStatus(bool: boolean) {
-  emit('menuOpen', bool)
-  menuOpen.value = bool
+  baseStore.menuOpen = bool
 }
 </script>
 <style lang="scss" scoped>
