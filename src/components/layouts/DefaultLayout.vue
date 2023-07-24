@@ -5,12 +5,12 @@
         <DesktopAsideMenu></DesktopAsideMenu>
         <MobileAsideMenu></MobileAsideMenu>
       </el-aside>
-      <el-container class="container">
+      <el-container class="layout-container">
         <el-header class="header">
           <DefaultHeader />
         </el-header>
         <NavigationHeader></NavigationHeader>
-        <el-container class="container__main">
+        <el-container class="layout-container__main">
           <el-main class="main">
             <slot />
           </el-main>
@@ -32,7 +32,7 @@ import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
 .layout {
   height: 100vh;
 }
-.container {
+.layout-container {
   height: 100vh;
   &__main {
     overflow-y: auto;
