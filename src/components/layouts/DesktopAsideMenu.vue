@@ -1,7 +1,7 @@
 <template>
   <el-menu
     default-active="1"
-    class="el-menu-vertical-demo"
+    class="desktop-aside-menu"
     :collapse="!props.menuOpen"
     @open="handleOpen"
     @close="handleClose"

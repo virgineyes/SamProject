@@ -2,14 +2,14 @@
   <div>
     <el-container class="layout">
       <el-aside class="aside" width="auto">
-        <DesktopAsideMenu v-if="isDesktop" :menuOpen="menuOpen"></DesktopAsideMenu>
-        <MobileAsideMenu v-else @closed="menuOpen = false" :menuOpen="menuOpen"></MobileAsideMenu>
+        <DesktopAsideMenu :menuOpen="menuOpen"></DesktopAsideMenu>
+        <MobileAsideMenu @closed="menuOpen = false" :menuOpen="menuOpen"></MobileAsideMenu>
       </el-aside>
       <el-container>
         <el-header class="header">
           <DefaultHeader @menuOpen="getCollapsingStatus" />
         </el-header>
-        <NavigationHeader v-if="isDesktop"></NavigationHeader>
+        <NavigationHeader></NavigationHeader>
         <el-container>
           <el-main class="main">
             <slot />
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 import DefaultHeader from './DefaultHeader.vue'
 import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
@@ -35,7 +35,6 @@ const menuOpen = ref(false)
 function getCollapsingStatus(status: boolean) {
   menuOpen.value = status
 }
-const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
 </script>
 <style lang="scss" scoped>
 .layout {
@@ -63,6 +62,22 @@ const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
   p {
     color: white;
     line-height: 60px;
+  }
+}
+.desktop-aside-menu {
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+}
+.mobile-sidebar {
+  display: none;
+  @media (max-width: 767.98px) {
+    display: block;
+  }
+}
+.navigation-header {
+  @media (max-width: 767.98px) {
+    display: none;
   }
 }
 </style>

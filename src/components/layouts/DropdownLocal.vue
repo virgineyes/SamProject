@@ -15,15 +15,22 @@
   </el-dropdown>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 import { ElMessage } from 'element-plus'
 import { ArrowDown, LocationFilled } from '@element-plus/icons-vue'
 
+const windowWidth = ref(0)
 const handleCommand = (command: string | number | object) => {
   ElMessage(`click on item ${command}`)
 }
-const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
+const isDesktop = computed(() => windowWidth.value >= 768)
+window.addEventListener('resize', () => {
+  windowWidth.value = document.documentElement.clientWidth
+})
+onMounted(() => {
+  windowWidth.value = document.documentElement.clientWidth
+})
 </script>
 <style lang="scss">
 .dropdown-local {

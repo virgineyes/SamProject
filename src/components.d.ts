@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
     DefaultHeader: typeof import('./components/layouts/DefaultHeader.vue')['default']
     DefaultLayout: typeof import('./components/layouts/DefaultLayout.vue')['default']
     DesktopAsideMenu: typeof import('./components/layouts/DesktopAsideMenu.vue')['default']

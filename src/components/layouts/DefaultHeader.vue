@@ -10,20 +10,18 @@
       /></el-icon>
       <el-icon
         v-show="menuOpen"
-        class="default-header__hamburger"
+        class="default-header__hamburger default-header__hamburger--close"
         @click="changeCollapseStatus(false)"
         size="30px"
-        :color="isDesktop ? '#fff' : '#0087dc'"
         ><Fold
       /></el-icon>
       <a
-        class="default-header__left-title"
-        :class="{ 'default-header__center-title': !isDesktop }"
+        class="default-header__left-title default-header__center-title"
         href="javascript:void(0)"
         @click="$router.push('/home')"
       >
         <img class="default-header__logo" src="../../assets/logo_w.svg" />
-        <span v-if="isDesktop">System Name</span>
+        <span class="default-header__title">System Name</span>
       </a>
     </div>
 
@@ -34,7 +32,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import DropdownLocal from '~/components/layouts/DropdownLocal.vue'
 import DropdownUser from '~/components/layouts/DropdownUser.vue'
 import { Expand, Fold } from '@element-plus/icons-vue'
@@ -46,7 +44,6 @@ function changeCollapseStatus(bool: boolean) {
   emit('menuOpen', bool)
   menuOpen.value = bool
 }
-const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
 </script>
 <style lang="scss" scoped>
 .default-header {
@@ -76,10 +73,17 @@ const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
     white-space: nowrap;
   }
   &__center-title {
-    margin-top: 0;
+    @media (max-width: 767.98px) {
+      margin-top: 0;
+    }
   }
   &__logo {
     margin-right: 16px;
+  }
+  &__title {
+    @media (max-width: 767.98px) {
+      display: none;
+    }
   }
   .dropdown-local {
     margin-right: 16px;
@@ -88,6 +92,12 @@ const isDesktop = computed(() => document.documentElement.clientWidth >= 768)
     margin-right: 20px;
     cursor: pointer;
     z-index: 100;
+    &--close {
+      color: #fff;
+      @media (max-width: 767.98px) {
+        color: #0087dc;
+      }
+    }
   }
 }
 </style>
