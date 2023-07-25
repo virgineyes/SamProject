@@ -44,18 +44,18 @@ import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
   box-shadow: 0 0 10px rgba(#000, 0.1);
 }
 .header {
-  background-color: basic.$delta-blue;
+  background-color: $delta-blue;
   line-height: 60px;
   text-align: center;
   font-size: 16px;
   color: #fff;
 }
 .main {
-  background-color: basic.$delta-light-gray;
+  background-color: $delta-light-gray;
   padding: 32px 24px;
 }
 .footer {
-  background-color: basic.$delta-silver-white;
+  background-color: $delta-silver-white;
   height: unset;
   text-align: center;
   font-size: 12px;

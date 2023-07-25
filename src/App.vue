@@ -1,5 +1,5 @@
 <template>
-  <el-config-provider namespace="ep">
+  <el-config-provider>
     <DefaultLayout>
       <template #default>
         <router-view />

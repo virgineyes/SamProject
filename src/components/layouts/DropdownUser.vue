@@ -33,11 +33,8 @@ onMounted(() => {
 </script>
 <style lang="scss">
 .dropdown-user {
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
   cursor: pointer;
-  .el-dropdown-link:focus {
-    outline: none;
-  }
 }
 </style>

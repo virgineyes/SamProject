@@ -34,13 +34,10 @@ onMounted(() => {
 </script>
 <style lang="scss">
 .dropdown-local {
-  color: #fff;
+  color: #fff !important;
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  .el-dropdown-link:focus {
-    outline: none;
-  }
 }
 </style>

@@ -79,7 +79,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 <style lang="scss" scoped>
-.ep-menu:not(.ep-menu--collapse) {
+.el-menu:not(.el-menu--collapse) {
   width: 250px;
   height: 100vh;
 }
