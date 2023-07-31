@@ -1,8 +1,8 @@
-FROM node:lts-alpine as build-stage
+FROM it-docker.deltaww.com/element-plus-vite-starter-builder:latest as build-stage
 
 WORKDIR /app
 COPY package.json ./
-RUN npm install
+RUN npm install --prefer-offline
 
 COPY . .
 RUN npm run build
