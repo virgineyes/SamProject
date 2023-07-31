@@ -2,7 +2,7 @@
   <el-upload
     drag
     :headers="{ Authorization: token }"
-    :action="fileAPI"
+    :action="props.docType ? `${fileAPI}?type=${props.docType}` : fileAPI"
     :on-success="handleSuccess"
     :on-error="handleError"
     :before-upload="beforeAvatarUpload"
@@ -10,7 +10,7 @@
     <el-icon class="el-icon--upload"><UploadFilled /></el-icon>
     <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
     <template #tip>
-      <div class="el-upload__tip">{{ tip }}</div>
+      <div class="el-upload__tip">{{ props.tip }}</div>
     </template>
   </el-upload>
 </template>
@@ -30,9 +30,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['onFinished'])
-const fileAPI = ref(
-  `${process.env.VITE_APP_BACKEND_URL}file/attachment/upload-single?description=&type=${props.docType}`
-)
+const fileAPI = ref(`${process.env.VITE_APP_BACKEND_URL}file/attachment/upload-single`)
 
 function handleSuccess(res: any) {
   emit('onFinished', res)
