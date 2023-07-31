@@ -17,9 +17,6 @@ export const base = defineStore('base', {
     getUser: (state) => state.user
   },
   actions: {
-    setToken(value: string) {
-      this.token = value
-    },
     setLoading(value: boolean) {
       this.loading = value
     },

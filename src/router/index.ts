@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
     })
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    baseI.setToken(Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME))
+    baseI.token = Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME) || ""
     next()
   } else {
     // Home 不需要登入(大寫區分 Redirect )
