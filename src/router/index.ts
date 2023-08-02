@@ -8,6 +8,7 @@ import {
 import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
+import { getCurrentUser } from "../util/api/auth"
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
@@ -37,15 +38,42 @@ const ValidateDeltaDomain = (url: string) => {
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.query.token) {
-    const token = to.query.token as string
+  const token = to.query.token as string
+  if (token) {
     Cookies.set(import.meta.env.VITE_APP_AUTH_TOKEN_NAME, token, {
       expires: 1000 * 60 * 60 * 6
     })
+    baseI.setLogin(true)
+    baseI.setRedirectUrl(to.path)
+    // next({
+    //   path: '/getToken',
+    // })
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    baseI.setToken(Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME))
-    next()
+    if (Object.keys(baseI.getUser()).length === 0) {
+      baseI.setLoading(true)
+      getCurrentUser()
+        .then((response: any) => {
+          baseI.setUser(response.data)
+        })
+        .catch((error: any) => {
+          baseI.setLogin(false)
+          Cookies.remove(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
+          console.log(error)
+        })
+        .finally(() => {
+          baseI.setLoading(false)
+        })
+      next()
+    } else {
+      if (baseI.getUser().systemAdmin) {
+        next()
+      } else {
+        next({
+          path: '/home',
+        })
+      }
+    }
   } else {
     // Home 不需要登入(大寫區分 Redirect )
     if (to.path === '/homeNoAuth') {
