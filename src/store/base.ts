@@ -3,28 +3,36 @@ import { defineStore } from 'pinia'
 export const base = defineStore('base', {
   state: () => {
     return {
-      token: '',
       loading: false,
+      login: false,
       language: '',
-      user: {},
+      user: Object,
       menuOpen: false,
+      redirectUrl: ''
     }
   },
   getters: {
-    getToken: (state) => state.token,
     getLoading: (state) => state.loading,
+    getLogin: (state) => state.login, 
     getLanguage: (state) => state.language,
-    getUser: (state) => state.user
+    getUser: (state) => state.user,
+    getRedirectUrl: state => state.redirectUrl
   },
   actions: {
     setLoading(value: boolean) {
       this.loading = value
     },
+    setLogin(value: boolean) {
+      this.login = value
+    },
     setLanguage(value: string) {
       this.language = value
     },
-    setUser(value: object) {
+    setUser(value: any) {
       this.user = value
-    }
+    },
+    setRedirectUrl(value: string) {
+      this.redirectUrl = value
+    },
   }
 })
