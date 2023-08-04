@@ -14,7 +14,6 @@
     <el-table-column
       v-for="col in props.tableCol"
       :key="`col-${col.colKey}`"
-      v-loading="col.loading"
       v-bind="col"
       :label="col.name"
       :className="`list-table__col--${col.colKey}`"
@@ -44,6 +43,7 @@
     </el-table-column>
   </el-table>
   <el-pagination
+    v-if="showPagination"
     layout="prev, pager, next, jumper"
     :total="tableData.length"
     :page-size="page.pageSize"
@@ -59,15 +59,14 @@ import { reactive } from 'vue'
 
 const page = reactive<{ currentPage: number; pageSize: number }>({
   currentPage: 1,
-  pageSize: 1
+  pageSize: 2
 })
 type TD = {
-  loading: boolean
   colKey: any
   name: string
-  type: string
-  width: Number
-  externalLink: any
+  type?: string
+  width?: number
+  externalLink?: any
 }
 const props = withDefaults(
   defineProps<{
@@ -77,11 +76,13 @@ const props = withDefaults(
     dropdownAction?: boolean
     actionCol?: Array<Object>
     stripe?: boolean
+    showPagination?: boolean
   }>(),
   {
     isLoading: false,
     dropdownAction: false,
-    stripe: true
+    stripe: true,
+    showPagination: true
   }
 )
 const emit = defineEmits(['switchChange'])
