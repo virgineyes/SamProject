@@ -17,8 +17,8 @@ build:
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
-  # rules:
-  #   - if: '$CI_COMMIT_REF_NAME == "main"'
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
 buildStage:
   stage: build
   image:
