@@ -1,3 +1,22 @@
+stages:
+  - test
+  - build
+lint:
+  stage: test
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  variables:
+    CI_REGISTRY: 'it-docker.deltaww.com'
+    CI_REGISTRY_USER: 'docker.itmdev'
+    CI_REGISTRY_PASSWORD: 'QqIlB1NoZeDjwrpQ'
+  script:
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/LintDockerfile" --no-push
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 build:
   stage: build
   image:
@@ -7,8 +26,6 @@ build:
     CI_REGISTRY: 'it-docker.deltaww.com'
     CI_REGISTRY_USER: 'docker.itmdev'
     CI_REGISTRY_PASSWORD: 'QqIlB1NoZeDjwrpQ'
-  # before_script:
-  #   - docker login it-docker.deltaww.com -u docker.devops -p QqIlB1NoZeDjwrpQ
   script:
     - DATE=`date '+%Y%m%d.%H%M%S'`
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
@@ -28,8 +45,6 @@ buildStage:
     CI_REGISTRY: 'it-docker.deltaww.com'
     CI_REGISTRY_USER: 'docker.itmdev'
     CI_REGISTRY_PASSWORD: 'QqIlB1NoZeDjwrpQ'
-  # before_script:
-  #   - docker login it-docker.deltaww.com -u docker.devops -p QqIlB1NoZeDjwrpQ
   script:
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
@@ -40,3 +55,20 @@ buildStage:
   only:
     changes:
       - package.json
+testRunner:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: ['']
+  variables:
+    CI_REGISTRY: 'it-docker.deltaww.com'
+    CI_REGISTRY_USER: 'docker.itmdev'
+    CI_REGISTRY_PASSWORD: 'QqIlB1NoZeDjwrpQ'
+  script:
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - cat /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/testRunnerDockerfile"
+      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}-test-runner"
+  when: manual
