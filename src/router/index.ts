@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
 import { getCurrentUser } from "../util/api/auth"
+
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
@@ -47,12 +48,10 @@ router.beforeEach((to, from, next) => {
     })
     baseI.setLogin(true)
     baseI.setRedirectUrl(to.path)
-    // next({
-    //   path: '/getToken',
-    // })
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    if (Object.keys(baseI.getUser()).length === 0) {
+    if (Object.keys(baseI.getUser)?.length === 0) {
+
       baseI.setLoading(true)
       getCurrentUser()
         .then((response: any) => {
@@ -61,21 +60,13 @@ router.beforeEach((to, from, next) => {
         .catch((error: any) => {
           baseI.setLogin(false)
           Cookies.remove(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
-          console.log(error)
+          console.error(error)
         })
         .finally(() => {
           baseI.setLoading(false)
         })
-      next()
-    } else {
-      if (baseI.getUser().systemAdmin) {
-        next()
-      } else {
-        next({
-          path: '/home',
-        })
-      }
     }
+    next()
   } else {
     // Home 不需要登入(大寫區分 Redirect )
     if (to.path === '/homeNoAuth') {
@@ -83,7 +74,7 @@ router.beforeEach((to, from, next) => {
     } else {
       localStorage.setItem(
         'loginAuthCount',
-        Number(localStorage.getItem('loginAuthCount') ?? 0) + 1
+        `${Number(localStorage.getItem('loginAuthCount') ?? 0) + 1}`
       )
       let authnURL = import.meta.env.VITE_APP_AUTH_URL
       let frontURL = import.meta.env.VITE_APP_FRONTEND_URL

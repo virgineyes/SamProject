@@ -13,7 +13,7 @@ export const base = defineStore('base', {
   },
   getters: {
     getLoading: (state) => state.loading,
-    getLogin: (state) => state.login, 
+    getLogin: (state) => state.login,
     getLanguage: (state) => state.language,
     getUser: (state) => state.user,
     getRedirectUrl: state => state.redirectUrl

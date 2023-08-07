@@ -2,14 +2,15 @@
   <div class="home">
     <img alt="Vue logo" class="element-plus-logo" src="../assets/logo.png" />
     <HelloWorld msg="Hello Vue 3.0 + Element Plus + Vite in Delta" />
-    <div style="word-break: break-word;">{{ user }}</div>
+    <div style="word-break: break-word; border: 2px solid deepPink">{{ user }}</div>
   </div>
 </template>
 <script setup lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { base } from '../store/base'
+
 const baseI = base()
-let user: object = baseI.getUser
+const user = computed(() => baseI.getUser)
 
 defineProps<{ msg: string }>()
 defineComponent({
