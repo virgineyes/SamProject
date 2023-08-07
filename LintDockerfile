@@ -1,0 +1,7 @@
+FROM it-docker.deltaww.com/element-plus-vite-starter-test-runner:latest
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm run lint

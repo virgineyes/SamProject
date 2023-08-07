@@ -63,12 +63,9 @@ export default ({ mode }) => {
         transformers: [transformerDirectives(), transformerVariantGroup()]
       })
     ],
-    base:
-      process.env.VITE_USER_NODE_ENV === 'ghpage'
-        ? 'https://github.deltaww.com/pages/ITMfgSuptDev/element-plus-vite-starter/'
-        : '',
+    base: '',
     build: {
-      outDir: process.env.VITE_USER_NODE_ENV === 'ghpage' ? './build' : './dist'
+      outDir: './dist'
     },
     define: {
       'process.env': process.env
