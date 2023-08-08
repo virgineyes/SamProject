@@ -1,7 +1,4 @@
-stages:
-  - test
-  - build
-lint:
+lintAnsTest:
   stage: test
   image:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
@@ -14,7 +11,7 @@ lint:
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/LintDockerfile" --no-push
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/LintAndTestDockerfile" --no-push
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 build:
@@ -32,7 +29,7 @@ build:
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/Dockerfile"
       --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master"'
@@ -50,7 +47,7 @@ buildStage:
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/BuildStageDockerfile"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/BuildStageDockerfile"
       --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}-builder"
   only:
     changes:
@@ -69,6 +66,6 @@ testRunner:
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/testRunnerDockerfile"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/TestRunnerDockerfile"
       --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}-test-runner"
   when: manual
