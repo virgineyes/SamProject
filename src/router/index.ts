@@ -8,6 +8,8 @@ import {
 import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
+import { getCurrentUser } from "../util/api/auth"
+
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
@@ -39,14 +41,31 @@ const ValidateDeltaDomain = (url: string) => {
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.query.token) {
-    const token = to.query.token as string
+  const token = to.query.token as string
+  if (token) {
     Cookies.set(import.meta.env.VITE_APP_AUTH_TOKEN_NAME, token, {
       expires: 1000 * 60 * 60 * 6
     })
+    baseI.setLogin(true)
+    baseI.setRedirectUrl(to.path)
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    baseI.token = Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME) || ""
+    if (Object.keys(baseI.getUser)?.length === 0) {
+
+      baseI.setLoading(true)
+      getCurrentUser()
+        .then((response: any) => {
+          baseI.setUser(response.data)
+        })
+        .catch((error: any) => {
+          baseI.setLogin(false)
+          Cookies.remove(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
+          console.error(error)
+        })
+        .finally(() => {
+          baseI.setLoading(false)
+        })
+    }
     next()
   } else {
     // Home 不需要登入(大寫區分 Redirect )
@@ -55,7 +74,7 @@ router.beforeEach((to, from, next) => {
     } else {
       localStorage.setItem(
         'loginAuthCount',
-        Number(localStorage.getItem('loginAuthCount') ?? 0) + 1
+        `${Number(localStorage.getItem('loginAuthCount') ?? 0) + 1}`
       )
       let authnURL = import.meta.env.VITE_APP_AUTH_URL
       let frontURL = import.meta.env.VITE_APP_FRONTEND_URL

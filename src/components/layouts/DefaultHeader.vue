@@ -18,7 +18,7 @@
       <a
         class="default-header__left-title default-header__center-title"
         href="javascript:void(0)"
-        @click="$router.push('/home')"
+        @click="$router.push({ name: 'home' })"
       >
         <img class="default-header__logo" src="../../assets/logo_w.svg" />
         <span class="default-header__title">System Name</span>
