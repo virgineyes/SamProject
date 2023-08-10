@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
+import { visualizer } from 'rollup-plugin-visualizer'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import eslintPlugin from 'vite-plugin-eslint' // 新增這行
@@ -61,6 +61,13 @@ export default ({ mode }) => {
           })
         ],
         transformers: [transformerDirectives(), transformerVariantGroup()]
+      }),
+      visualizer({
+        template: 'treemap', // or sunburst
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+        filename: 'analysis.html' // will be saved in project's root
       })
     ],
     base: '',
