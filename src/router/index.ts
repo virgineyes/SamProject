@@ -8,15 +8,23 @@ import {
 import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
-import { getCurrentUser } from "../util/api/auth"
+import { getCurrentUser } from '../util/api/auth'
 
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'home', component: () => import('../views/Home.vue') },
   { path: '/info', name: 'in-fo', component: () => import('../views/Info.vue') },
-  { path: '/demo1/tableDemo', name: 'DEMO1_TABLEDEMO', component: () => import('../views/TableDemo.vue') },
-  { path: '/demo2/fileUploaderDemo', name: 'DEMO2_FILEUPLOADERDEMO', component: () => import('../views/FileUploaderDemo.vue') }
+  {
+    path: '/demo1/tableDemo',
+    name: 'DEMO1_TABLEDEMO',
+    component: () => import('../views/TableDemo.vue')
+  },
+  {
+    path: '/demo2/fileUploaderDemo',
+    name: 'DEMO2_FILEUPLOADERDEMO',
+    component: () => import('../views/FileUploaderDemo.vue')
+  }
 ]
 
 const options: RouterOptions = {
@@ -51,7 +59,6 @@ router.beforeEach((to, from, next) => {
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
     if (Object.keys(baseI.getUser)?.length === 0) {
-
       baseI.setLoading(true)
       getCurrentUser()
         .then((response: any) => {
