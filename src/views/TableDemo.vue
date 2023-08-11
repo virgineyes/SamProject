@@ -58,7 +58,7 @@ const tableData = ref([
     templateEX: '<h1>from template</h1>'
   },
   {
-    date: '2023-05-01',
+    date: 'Today',
     name: 'Y',
     address: 'No. 189, Grove St, Los Angeles',
     externalLink: 'https://www.google.com.tw/?hl=zh_TW'
