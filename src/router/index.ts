@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
 import { getCurrentUser } from '../util/api/auth'
+import { ElMessage } from 'element-plus'
 
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
@@ -67,7 +68,10 @@ router.beforeEach((to, from, next) => {
         .catch((error: any) => {
           baseI.setLogin(false)
           Cookies.remove(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
-          console.error(error)
+          ElMessage.error({
+            message: error,
+            duration: 5000
+          })
         })
         .finally(() => {
           baseI.setLoading(false)

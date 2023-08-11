@@ -1,16 +1,17 @@
 <template>
   <div class="list-table">
     <el-input
+      v-if="showSearchBar"
       class="list-table__search"
       v-model="searchInput"
       placeholder="Search"
-      @input="searchFilter"
-    />
+      @input="props.frontendSearch ? searchFilter($event) : emit('onSearch', $event)"
+    />{{ props.frontendSearch ? 'searchFilter' : 'emit' }}
     <el-table
       v-loading="props.isLoading"
       class="list-table__table"
       :data="
-        searchInput.trim()
+        props.frontendSearch && searchInput.trim().length > 0
           ? searchData.slice(
               (page.currentPage - 1) * page.pageSize,
               page.currentPage * page.pageSize
@@ -22,6 +23,7 @@
       "
       :stripe="props.stripe"
       @row-click="$emit('row-click', $event)"
+      @sort-change="sortChanged"
     >
       <el-table-column
         v-for="col in props.tableCol"
@@ -55,9 +57,13 @@
       </el-table-column>
     </el-table>
     <el-pagination
-      v-if="showPagination"
+      v-if="props.showPagination"
       layout="prev, pager, next, jumper"
-      :total="searchInput.trim() ? searchData.length : tableData.length"
+      :total="
+        props.frontendSearch && searchInput.trim().length > 0
+          ? searchData.length
+          : props.tableData.length
+      "
       :page-size="page.pageSize"
       :pager-count="5"
       :current-page="page.currentPage"
@@ -68,7 +74,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, toRaw } from 'vue'
+import { reactive, ref } from 'vue'
 import debounce from 'lodash/debounce'
 
 const searchInput = ref('')
@@ -77,7 +83,7 @@ const page = reactive<{ currentPage: number; pageSize: number }>({
   currentPage: 1,
   pageSize: 2
 })
-type TD = {
+type TC = {
   colKey: any
   name: string
   type?: string
@@ -87,30 +93,30 @@ type TD = {
 const props = withDefaults(
   defineProps<{
     isLoading?: boolean
-    tableCol: Array<TD>
+    tableCol: Array<TC>
     tableData: Array<Object>
-    dropdownAction?: boolean
-    actionCol?: Array<Object>
     stripe?: boolean
     showPagination?: boolean
+    frontendSearch?: boolean
+    showSearchBar?: boolean
   }>(),
   {
     isLoading: false,
-    dropdownAction: false,
     stripe: true,
-    showPagination: true
+    showPagination: true,
+    frontendSearch: true,
+    showSearchBar: true
   }
 )
-const emit = defineEmits(['switchChange'])
+const emit = defineEmits(['switchChange', 'onSearch', 'sortChange', 'link-click', 'row-click'])
 
 const searchFilter = debounce((keyWord: string) => {
   searchData.value = []
   page.currentPage = 1
   props.tableData.forEach((e) => {
     Object.values(e).forEach((val) => {
-      if (val.match(keyWord) && searchData.value.indexOf(e) === -1) {
+      if (val.toLowerCase().match(keyWord.toLowerCase()) && searchData.value.indexOf(e) === -1) {
         searchData.value.push(e)
-        console.log('searchData', toRaw(searchData))
       }
     })
   })
@@ -121,6 +127,9 @@ function switchChange(e: any, i: any) {
 function handleCurrentChange(val: number) {
   page.currentPage = val
   window.scrollTo(0, 0)
+}
+function sortChanged(e: Object) {
+  emit('sortChange', e)
 }
 </script>
 
