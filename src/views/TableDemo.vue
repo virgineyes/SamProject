@@ -18,7 +18,7 @@ import { base } from '~/store/base'
 const baseStore = base()
 
 const tableCol = ref([
-  { colKey: 'date', name: '日期' },
+  { colKey: 'date', name: '日期', sortable: true },
   {
     colKey: 'name',
     name: '姓名',

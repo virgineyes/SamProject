@@ -17,7 +17,6 @@
       /></el-icon>
       <a
         class="default-header__left-title default-header__center-title"
-        href="javascript:void(0)"
         @click="$router.push({ name: 'home' })"
       >
         <img class="default-header__logo" src="../../assets/logo_w.svg" />
@@ -69,10 +68,12 @@ function changeCollapseStatus(bool: boolean) {
     text-decoration: none;
     margin-top: 15px;
     white-space: nowrap;
+    cursor: pointer;
   }
   &__center-title {
     @media (max-width: 767.98px) {
       margin-top: 0;
+      cursor: pointer;
     }
   }
   &__logo {
