@@ -1,6 +1,6 @@
 <template>
   <div v-loading="baseStore.loading">
-    <PageHeader title="Table Demo" />
+    <PageHeader :title="$t('TABLE_DEMO')" />
     <el-card>
       <ListTable :isLoading="false" :tableCol="tableCol" :tableData="tableData" :stripe="false">
         <template #templateEX="{ scope: { row } }">
@@ -18,7 +18,7 @@ import { base } from '~/store/base'
 const baseStore = base()
 
 const tableCol = ref([
-  { colKey: 'date', name: '日期' },
+  { colKey: 'date', name: '日期', sortable: true },
   {
     colKey: 'name',
     name: '姓名',
@@ -58,7 +58,7 @@ const tableData = ref([
     templateEX: '<h1>from template</h1>'
   },
   {
-    date: '2023-05-01',
+    date: 'Today',
     name: 'Y',
     address: 'No. 189, Grove St, Los Angeles',
     externalLink: 'https://www.google.com.tw/?hl=zh_TW'

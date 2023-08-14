@@ -1,7 +1,14 @@
 import { authAxiosInstance } from '../axiosInstance'
-const url = '/auth/current-user/'
-/// 取得 Current User
+const url = '/auth/'
+
 export const getCurrentUser = () => {
-  console.log(authAxiosInstance)
-  return authAxiosInstance.get(`${url}`)
+  return authAxiosInstance.get(`${url}` + 'current-user')
+}
+export const putSwitchUser = (username: string) => {
+  return authAxiosInstance.put(
+    `${url}` + 'switch-user',
+    JSON.stringify({
+      username: username
+    })
+  )
 }
