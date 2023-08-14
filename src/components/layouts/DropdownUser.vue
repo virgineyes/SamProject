@@ -1,7 +1,7 @@
 <template>
   <el-dropdown @command="handleCommand" class="dropdown-user">
     <span class="el-dropdown-link" v-if="isDesktop">
-      Welcome, {{ user.user.username }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+      Welcome, {{ user.username }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
     </span>
     <span v-else class="el-dropdown-link"
       ><el-icon size="20"><Avatar /></el-icon
@@ -46,6 +46,7 @@ const handleCommand = (command: string | number | object) => {
             })
             getCurrentUser()
               .then((response: any) => {
+                console.log(response.data)
                 baseI.setUser(response.data)
               })
               .catch((error: any) => {
