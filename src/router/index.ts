@@ -25,7 +25,8 @@ const routes: RouteRecordRaw[] = [
     path: '/demo2/fileUploaderDemo',
     name: 'DEMO2_FILEUPLOADERDEMO',
     component: () => import('../views/FileUploaderDemo.vue')
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: 'Error', component: () => import('../views/ErrorPage.vue') },
 ]
 
 const options: RouterOptions = {
