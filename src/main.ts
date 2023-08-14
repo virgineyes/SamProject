@@ -4,8 +4,7 @@ import App from './App.vue'
 // import ElementPlus from 'element-plus'
 import { authAxiosInstance } from './util/axiosInstance'
 import pinia from './store/store'
-// or use cdn, uncomment cdn link in `index.html`
-
+import i18n from './config/i18n'
 import './styles/index.scss'
 import 'uno.css'
 
@@ -22,3 +21,4 @@ app.config.globalProperties.$authAxios = { ...authAxiosInstance }
 app.use(pinia)
 app.use(router)
 app.mount('#app')
+app.use(i18n)

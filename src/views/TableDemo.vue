@@ -1,6 +1,6 @@
 <template>
   <div v-loading="baseStore.loading">
-    <PageHeader title="Table Demo" />
+    <PageHeader :title="$t('TABLE_DEMO')" />
     <el-card>
       <ListTable :isLoading="false" :tableCol="tableCol" :tableData="tableData" :stripe="false">
         <template #templateEX="{ scope: { row } }">
