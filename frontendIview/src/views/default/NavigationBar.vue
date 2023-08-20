@@ -1,6 +1,6 @@
 <template>
   <vue-navigation-bar :options="navbarOptions" ref="navbar">
-    <template v-slot:custom-section v-if="isSmallDevice">
+    <!-- <template v-slot:custom-section v-if="isSmallDevice">
       <p>
         <a href="javascript:void(0)" @click="router('home')">
           <span class="logoTilt" style="font-size:24px;">{{ $t('COMMON_TITLE') }}</span>
@@ -25,12 +25,7 @@
       <template v-if="!isLogin">
         <div class="logoTilt p-1">{{ $t('LOGIN') }} <i class="fa fa fa-sign-in" @click="login"></i></div>
       </template>
-    </template>
-    <!-- <Modal :z-index="999" :reset-drag-position="true" v-model="switchUserModal" sticky :draggable="true" :title="$t('COMMON_TEXT_SWITCH_USER')" @on-ok="confirmSwitchUser">
-      <FormRow :fieldNameArr="[$t('LOGIN_ACCOUNT')]">
-        <Input v-model="switchUserName" v-upper-case slot="a" />
-      </FormRow>
-    </Modal> -->
+    </template> -->
   </vue-navigation-bar>
 </template>
 
@@ -48,25 +43,32 @@ export default {
     VueNavigationBar,
   },
   methods: {
-    ...mapGetters(["getUserProfile", "getLanguage", "getLogin", "getSmallDevice", "getGroupCode", "getMenuOptionsLeft"]),
+    ...mapGetters([
+      "getUserProfile",
+      "getLanguage",
+      "getLogin",
+      "getSmallDevice",
+      "getGroupCode",
+      "getMenuOptionsLeft",
+    ]),
     ...mapActions(["setLanguage", "setLogin", "setGroupCode", "toggleLoading", "setUserProfile", "setMenuOptionsLeft"]),
     router(path) {
       this.$router.push(`/${path}`, () => {})
     },
     auhtControl(action) {
-      if (action==="logout") {
+      if (action === "logout") {
         delCookie(process.env.VUE_APP_AUTH_TOKEN_NAME)
         this.setLogin(false)
         if (this.$router.history.current.fullPath !== "/home") {
           this.$router.push("/home")
         }
-      } else if (action==="switchUser") {
+      } else if (action === "switchUser") {
         this.switchUserModal = true
       }
     },
     changeLang() {
       this.setLanguage(this.locale)
-    }
+    },
   },
   data() {
     return {
@@ -81,7 +83,7 @@ export default {
         tooltipAnimationType: "scale",
         menuOptionsLeft: [],
         mobileBreakpoint: 992,
-      }
+      },
     }
   },
   watch: {
@@ -104,14 +106,17 @@ export default {
       return this.getSmallDevice()
     },
     isSystemAdmin() {
-      return this.getUserProfile() && this.getUserProfile().systemRoles && this.getUserProfile().systemRoles.includes('SYSTEM_ADMIN')
+      return (
+        this.getUserProfile() &&
+        this.getUserProfile().systemRoles &&
+        this.getUserProfile().systemRoles.includes("SYSTEM_ADMIN")
+      )
     },
     menuOptionsLeft() {
       return this.getMenuOptionsLeft()
-    }
+    },
   },
 }
-
 </script>
 
 <style>
@@ -128,5 +133,4 @@ export default {
 .vnb__menu-options__option__link {
   font-size: 18px;
 }
-
 </style>

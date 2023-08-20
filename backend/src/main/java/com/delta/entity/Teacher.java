@@ -37,18 +37,33 @@ public class Teacher extends BaseEntity {
   
   @Getter
   @Setter
-  @ApiModelProperty(value = "技能")
-  private String skill;
+  @ApiModelProperty(value = "自我介紹")
+  private String selfIntroduction;
   
-  @Getter
-  @Setter
-  @ApiModelProperty(value = "經歷")
-  private String experience;  
+//  @Getter
+//  @Setter
+//  @ApiModelProperty(value = "經歷")
+//  private String experience;  
   
   @Getter
   @Setter
   @ApiModelProperty(value = "所屬公司")
   private String partOfCompany; 
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "適合年齡From")
+  private String suitAgeFrom; 
+
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "適合年齡To")
+  private String suitAgeTo; 
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "標籤")
+  private List<String> label;
   
   /*
    *  尚未認證，測試中，驗證成功

@@ -1,11 +1,51 @@
 <template>
   <div class="content">
-    <div class="flex-container" v-if="isLogin"> 
-      <img class="flex-item" width="200" height="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/01_of_spades_A.svg/800px-01_of_spades_A.svg.png">
-      <div class="flex-column-container">
-        <span class="flex-item" style="font-size:56px;">{{ account }}</span>
-        <span class="flex-item" style="font-size:36px;">Coin: 1000$</span>
-        <span class="flex-item" style="font-size:36px;">Rank: 骨灰級人物</span>
+    <div class="Sidebar" v-if="isLogin">
+      <div style="margin: 0px 2px;" class="flex-container">
+        <img class="flex-column-container" width="150" height="150" src="../../assets/ace.png" />
+        <div class="flex-column-container" style="padding: 10px 20px">
+          <span class="flex-item" style="font-size:2em;">{{ account }}</span>
+          <span class="flex-item" style="font-size:2em;">Coin: 100000</span>
+        </div>
+        <img class="flex-column-container" width="150" height="150" src="../../assets/rank.png" />
+      </div>
+      <div class="flex-container">
+        <div class="flex-column-container">
+          <span class="flex-item" style="font-size:2em;">每日任務:</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="flex-column-container">
+          <span class="flex-item" style="font-size:2em;">每周任務:</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+        </div>
+      </div>
+    </div>
+    <div class="Body" v-if="isLogin">
+      <div class="flex-container">
+        <div class="content-box">
+          XXX
+        </div>
+        <div class="content-box">
+          XXX
+        </div>
+      </div>
+      <div class="flex-container">
+        圖1
+      </div>
+      <div class="flex-container">
+        圖2
       </div>
     </div>
   </div>
@@ -57,7 +97,7 @@ export default {
       } else {
         setDataGroup(vueInstance, vueInstance.dataGroupTemp, 5)
       }
-    }
+    },
   },
   computed: {
     isLogin() {
@@ -104,19 +144,42 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 </script>
 
 <style scoped>
-.flex-container {
+.Sidebar {
+  width: 35%;
+  float: left;
+  height: 98vh;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: gray;
+}
+.Sidebar .flex-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 1% 4%;
+  padding: 1% 5%;
 }
-.flex-item {
+.Sidebar .flex-item {
   padding: 0px 5px;
 }
-.flex-column-container {
+.Sidebar .flex-column-container {
   display: flex;
-  flex-direction:column;
-	flex-wrap:wrap;
-  align-items: flex-start
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.Body {
+  width: 65%;
+  height: 98vh;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #fffaf3;
+  float: left;
+}
+.Body .flex-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .logout-img {
@@ -135,40 +198,18 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
   justify-content: center;
 }
 
-.box {
-  /* height: 400px; */
-  border: 1px solid black;
-  background-color: white;
-}
-
-.content {
-  width: 100%;
-  height: 100vh;
-  display: inline-block;
-}
-
-.time-box {
-  display: inline-block;
-}
-
 .content-box {
-  word-wrap: break-word;
-  word-break: break-all;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 9;
-  -webkit-box-orient: vertical;
-  white-space: normal;
+  width: 50%;
+  height: 300px;
+  background: orange;
+  display: inline-block;
 }
 
-.footer-box {
+/* .content {
   width: 100%;
-  height: 10%;
-  padding: 5px;
-}
-
+  display: inline-block;
+  background-color: gainsboro;
+} */
 .user {
   display: flex;
   flex-wrap: wrap;
@@ -180,5 +221,12 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 }
 .vh-68 {
   max-height: 68vh !important;
+}
+.massion {
+  border-style: solid;
+  border-width: 1px;
+  width: 100%;
+  margin: 1px;
+  font-size: 1em;
 }
 </style>

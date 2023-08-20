@@ -20,9 +20,8 @@ import { Translate, ExceptionHandling } from "@/util/common"
 import * as types from "@/store/mutations_types.js"
 import { getCookie, delCookie } from "@/util/cookie"
 
-
 const authAxiosInstance = axios.create({
-  baseURL: process.env.VUE_APP_BACKEND_URL
+  baseURL: process.env.VUE_APP_BACKEND_URL,
 })
 
 authAxiosInstance.interceptors.request.use(
@@ -46,7 +45,7 @@ authAxiosInstance.interceptors.request.use(
 Vue.prototype.$buildErrorMessage = function(error) {
   let text = ""
   if (error.response) {
-    if (error.response.status===401) {
+    if (error.response.status === 401) {
       text = Translate("COMMON_MESSAGE_NOT_AUTH")
     } else if (error.response.data) {
       if (Array.isArray(error.response.data.messages)) {
@@ -62,7 +61,6 @@ Vue.prototype.$buildErrorMessage = function(error) {
   }
   return text
 }
-
 
 Vue.prototype.$authHttp = authAxiosInstance
 Vue.prototype.$Swal = Swal

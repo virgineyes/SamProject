@@ -51,6 +51,11 @@ public class Student extends BaseEntity {
   private String guardianEmail;
   
   @Getter
+  @Setter
+  @ApiModelProperty(value = "區域")
+  private Region region;
+  
+  @Getter
   @ApiModelProperty(value = "課程")
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = Course_.TEACHER)
   private List<Course> courses;

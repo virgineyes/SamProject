@@ -2,9 +2,7 @@
   <div id="app" v-cloak>
     <Header></Header>
     <article class="wanna-container">
-      <div class="main_wrapper">
-        <router-view :key="componentKey" />
-      </div>
+      <router-view :key="componentKey" />
     </article>
     <Footer></Footer>
     <BackTop :bottom="50"></BackTop>
@@ -38,7 +36,7 @@ export default {
       this.componentKey++
     },
     windowResizeListener(e) {
-      if (typeof e.target !== 'undefined') {
+      if (typeof e.target !== "undefined") {
         this.setSmallDevice(e.target.innerWidth < 992)
       }
     },
@@ -72,7 +70,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
   margin-top: 60px;
+}
+.wanna-container {
+  height: 100%;
 }
 </style>

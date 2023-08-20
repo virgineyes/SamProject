@@ -28,6 +28,16 @@ public class UserProfile extends BaseEntity {
   @Setter
   @ApiModelProperty(value = "GOOGLE ID")
   private String googleId;
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "LINE ID")
+  private String lindId;
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "IG ID")
+  private String igId;
 
   @Getter
   @Setter

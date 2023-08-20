@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.delta.common.CourseTypeEnum;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -62,7 +64,12 @@ public class Course extends BaseEntity {
   @Getter
   @Setter
   @ApiModelProperty(value = "課程類型")
-  private String type;
+  private CourseTypeEnum courseType;
+  
+  @Getter
+  @Setter
+  @ApiModelProperty(value = "標籤")
+  private List<String> label;
  
   @Getter
   @Setter
