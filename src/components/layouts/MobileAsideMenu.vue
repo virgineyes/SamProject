@@ -73,6 +73,7 @@
 
 <script lang="ts" setup>
 import { base } from '../../store/base'
+import { Location, Setting } from '@element-plus/icons-vue'
 
 const baseStore = base()
 </script>

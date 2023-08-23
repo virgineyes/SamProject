@@ -17,7 +17,6 @@ import 'element-plus/dist/index.css'
 
 const app = createApp(App)
 app.config.globalProperties.$authAxios = { ...authAxiosInstance }
-// app.use(ElementPlus)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

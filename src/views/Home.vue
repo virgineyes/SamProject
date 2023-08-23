@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue'
 
-defineProps<{ msg: string }>()
 defineComponent({
   name: 'HomeView'
 })

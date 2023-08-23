@@ -1,6 +1,6 @@
 <template>
   <el-config-provider>
-    <DefaultLayout>
+    <DefaultLayout v-loading="baseStore.loading">
       <template #default>
         <router-view :key="currentRoute" />
       </template>
@@ -10,7 +10,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { base } from '~/store/base'
 
+const baseStore = base()
 const $router = useRouter()
 const currentRoute = computed(() => {
   return $router.currentRoute.value.fullPath
