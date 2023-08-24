@@ -3,13 +3,14 @@ import {
   createWebHashHistory,
   RouterOptions,
   Router,
-  RouteRecordRaw
+  RouteRecordRaw,
 } from 'vue-router'
 import Cookies from 'js-cookie'
 import pinia from '../store/store'
 import { base } from '../store/base'
 import { getCurrentUser } from '../util/api/auth'
 import { ElMessage } from 'element-plus'
+import scrollToTop from '~/util/composables/basic'
 
 const baseI = base(pinia)
 const routes: RouteRecordRaw[] = [
@@ -31,7 +32,20 @@ const routes: RouteRecordRaw[] = [
 
 const options: RouterOptions = {
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else if (to.hash) {
+      return {
+        el: to.hash,
+      }
+    } else {
+      scrollToTop()
+    }
+  },
+
+
 }
 
 const router: Router = createRouter(options)
@@ -51,6 +65,7 @@ const ValidateDeltaDomain = (url: string) => {
 }
 
 router.beforeEach((to, from, next) => {
+  baseI.loading = true
   const token = to.query.token as string
   if (token) {
     Cookies.set(import.meta.env.VITE_APP_AUTH_TOKEN_NAME, token, {
@@ -117,5 +132,7 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
-
+router.afterEach(() => {
+  baseI.loading = false
+})
 export default router

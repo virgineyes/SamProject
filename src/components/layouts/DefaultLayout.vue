@@ -11,7 +11,7 @@
         </el-header>
         <NavigationHeader></NavigationHeader>
         <el-container class="layout-container__main">
-          <el-main class="main">
+          <el-main class="main" id="main">
             <slot />
           </el-main>
           <el-footer class="footer"

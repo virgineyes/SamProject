@@ -76,6 +76,10 @@ export default ({ mode }) => {
     },
     define: {
       'process.env': process.env
+    },
+    server: {
+      host: true,
+      port: 3000,
     }
   })
 }

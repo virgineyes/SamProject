@@ -76,12 +76,13 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import debounce from 'lodash/debounce'
+import scrollToTop from '~/util/composables/basic'
 
 const searchInput = ref('')
 const searchData = ref<any>([])
 const page = reactive<{ currentPage: number; pageSize: number }>({
   currentPage: 1,
-  pageSize: 2
+  pageSize: 10
 })
 type TC = {
   colKey: any
@@ -126,7 +127,7 @@ function switchChange(e: any, i: any) {
 }
 function handleCurrentChange(val: number) {
   page.currentPage = val
-  window.scrollTo(0, 0)
+  scrollToTop()
 }
 function sortChanged(e: Object) {
   emit('sortChange', e)
