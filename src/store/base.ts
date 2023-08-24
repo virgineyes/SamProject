@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n'
 
 export const base = defineStore('base', {
   state: () => {
@@ -17,7 +17,7 @@ export const base = defineStore('base', {
     getLogin: (state) => state.login,
     getLanguage: (state) => state.language,
     getUser: (state) => state.user,
-    getRedirectUrl: state => state.redirectUrl
+    getRedirectUrl: (state) => state.redirectUrl
   },
   actions: {
     setLoading(value: boolean) {
@@ -27,15 +27,15 @@ export const base = defineStore('base', {
       this.login = value
     },
     setLanguage(value: string) {
-      const t = useI18n();
+      const t = useI18n()
       this.language = value
-      t.locale.value = value;
+      t.locale.value = value
     },
     setUser(value: any) {
       this.user = value
     },
     setRedirectUrl(value: string) {
       this.redirectUrl = value
-    },
+    }
   }
 })

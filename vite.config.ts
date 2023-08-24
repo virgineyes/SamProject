@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import eslintPlugin from 'vite-plugin-eslint' // 新增這行
+import eslintPlugin from 'vite-plugin-eslint' 
 import Unocss from 'unocss/vite'
 import {
   presetAttributify,
@@ -14,7 +14,7 @@ import {
   transformerVariantGroup
 } from 'unocss'
 
-const pathSrc = path.resolve(__dirname, 'src')
+const pathSrc = path.resolve(__dirname, './src')
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -35,7 +35,7 @@ export default ({ mode }) => {
     },
     plugins: [
       vue(),
-      eslintPlugin({ cache: false }), // 新增這行
+      eslintPlugin({ cache: false }), 
       Components({
         // allow auto load markdown components under `./src/components/`
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.scss', 'vue', 'md'],
