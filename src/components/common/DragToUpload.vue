@@ -19,7 +19,7 @@
 import { ref } from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import { ElMessage, UploadProps } from 'element-plus'
-import { base } from '~/store/base'
+import { base } from '../../store/base'
 
 const baseStore = base()
 const token: string = baseStore.getToken
