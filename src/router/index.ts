@@ -129,8 +129,8 @@ router.beforeEach((to, from, next) => {
           '&errorUrl=' +
           `${frontURL}#/home`
       }
-      baseI.loading = false
     }
+    baseI.loading = false
   }
 })
 router.afterEach(() => {
