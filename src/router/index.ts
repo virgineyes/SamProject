@@ -76,13 +76,11 @@ router.beforeEach((to, from, next) => {
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
     if (Object.keys(baseI.getUser)?.length === 0) {
-      baseI.setLoading(true)
       getCurrentUser()
         .then((response: any) => {
           baseI.setUser(response.data)
         })
         .catch((error: any) => {
-          baseI.setLogin(false)
           Cookies.remove(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)
           ElMessage.error({
             message: error,
@@ -90,7 +88,7 @@ router.beforeEach((to, from, next) => {
           })
         })
         .finally(() => {
-          baseI.setLoading(false)
+          baseI.loading = false
         })
     }
     next()
