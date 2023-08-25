@@ -1,13 +1,13 @@
 <template>
   <div class="error-page">
     <div class="error-container">
-      <span class="error-container__code">404</span>
+      <span class="error-container__code">{{ $route.query.errorCode || 404 }}</span>
       <span class="error-container__title">Page Not Found</span>
       <span class="error-container__content"
         >The page you are looking for might have been removed had its name changed or is temporarily
         unavailable.</span
       >
-      <button class="error-container__goto-home-button">
+      <button v-if="$route.query.redirect !== 'false'" class="error-container__goto-home-button">
         {{ `GO TO HOME PAGE IN ${countDown}s` }}
       </button>
     </div>
@@ -15,18 +15,22 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const $router = useRouter()
+const $route = useRoute()
+
 const countDown = ref(5)
 onMounted(async () => {
-  const timer = setInterval(function () {
-    countDown.value--
-    if (countDown.value <= 0) {
-      clearInterval(timer)
-      $router.push({ name: 'home' })
-    }
-  }, 1000)
+  if ($route.query.redirect !== 'false') {
+    const timer = setInterval(function () {
+      countDown.value--
+      if (countDown.value <= 0) {
+        clearInterval(timer)
+        $router.push({ name: 'home' })
+      }
+    }, 1000)
+  }
 })
 </script>
 <style lang="scss">

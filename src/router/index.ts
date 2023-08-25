@@ -102,7 +102,7 @@ router.beforeEach((to, from, next) => {
   } else {
     console.log("8")
     // Home 不需要登入(大寫區分 Redirect )
-    if (to.path === '/homeNoAuth') {
+    if (to.name === 'Error') {
       console.log("9")
       next()
     } else {
@@ -117,12 +117,12 @@ router.beforeEach((to, from, next) => {
       if (!ValidateDeltaDomain(authnURL)) {
         console.log("11")
         authnURL = ''
-        next({ name: 'NoAuthorized' })
+        next({ name: 'Error', query: { errorCode: "403", redirect: "false" } })
       }
       if (!ValidateDeltaDomain(frontURL)) {
         console.log("12")
         frontURL = ''
-        next({ name: 'NoAuthorized' })
+        next({ name: 'Error', query: { errorCode: "403", redirect: "false" } })
       }
 
       if (Number(localStorage.getItem('loginAuthCount')) < 3) {
