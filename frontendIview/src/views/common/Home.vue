@@ -1,47 +1,94 @@
 <template>
   <div class="content">
+    <div class="home-page" v-if="!isLogin">
+      <Carousel autoplay :autoplay-speed="20000" loop v-model="value">
+        <CarouselItem>
+          <img class="login-img" src="@/assets/carouseTwo.png" />
+        </CarouselItem>
+        <CarouselItem>
+          <img class="login-img" src="@/assets/carouselOne.png" />
+        </CarouselItem>
+      </Carousel>
+    </div>
     <div class="Sidebar" v-if="isLogin">
       <div style="margin: 0px 2px;" class="flex-container">
-        <img class="flex-column-container" width="150" height="150" src="../../assets/ace.png" />
+        <img width="150" height="150" src="../../assets/ace.png" />
         <div class="flex-column-container" style="padding: 10px 20px">
           <span class="flex-item" style="font-size:2em;">{{ account }}</span>
-          <span class="flex-item" style="font-size:2em;">Coin: 100000</span>
+          <span class="flex-item" style="font-size:2em;">Coin: 1000000000000</span>
         </div>
-        <img class="flex-column-container" width="150" height="150" src="../../assets/rank.png" />
+        <img width="150" height="150" src="../../assets/rank.png" />
       </div>
-      <div class="flex-container">
-        <div class="flex-column-container">
-          <span class="flex-item" style="font-size:2em;">每日任務:</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+      <div style="margin: 0px 2px;" class="flex-container">
+        <div class="flex-column-container" style="width: 100%">
+          <div class="flex-item">
+            <span style="font-size:3em;">每日任務:</span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-checkmark-circle" style="color: skyblue;" />滑板課(滑板場)</div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />桌球課(體育館)</div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text">
+                <Icon type="md-bicycle" style="color: red;" />整理協會中心協會中心(協會中心)
+              </div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />煮飯(協會中心)</div>
+            </span>
+          </div>
         </div>
       </div>
-      <div class="flex-container">
-        <div class="flex-column-container">
-          <span class="flex-item" style="font-size:2em;">每周任務:</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
-          <span class="flex-item massion">滑板課 20230601(四) 協會中心</span>
+      <div style="margin: 0px 2px;" class="flex-container">
+        <div class="flex-column-container" style="width: 100%">
+          <div class="flex-item">
+            <span style="font-size:3em;">每周任務:</span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-checkmark-circle" style="color: skyblue;" />滑板課(滑板場)</div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />桌球課(體育館)</div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text">
+                <Icon type="md-bicycle" style="color: red;" />整理協會中心協會中心(協會中心)
+              </div>
+            </span>
+          </div>
+          <div class="flex-container-left massion">
+            <span>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />煮飯(協會中心)</div>
+            </span>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="Body" v-if="isLogin">
-      <div class="flex-container">
+      <div style="margin: 0px 2px;" class="flex-container">
         <div class="content-box">
-          XXX
+          <!-- <Bar id="my-chart-id" :options="chartOptions" :data="chartData" /> -->
         </div>
         <div class="content-box">
           XXX
         </div>
       </div>
-      <div class="flex-container">
+      <div style="margin: 0px 2px;" class="flex-container">
         圖1
       </div>
       <div class="flex-container">
@@ -55,8 +102,14 @@
 import { typeList } from "../../util/enums/bulletin-board"
 import { mapGetters } from "vuex"
 import { mapActions } from "vuex"
+// import { Bar } from "vue-chartjs"
+// import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js"
+
+// ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
 export default {
   name: "Home",
+  // components: { Bar },
   mounted() {
     const vueInstance = this
     vueInstance.windowResizeListener(vueInstance)
@@ -67,6 +120,13 @@ export default {
       boradValue: 0,
       dataGroupTemp: [],
       dataGroup: [],
+      // chartData: {
+      //   labels: ["January", "February", "March"],
+      //   datasets: [{ data: [40, 20, 12] }],
+      // },
+      // chartOptions: {
+      //   responsive: true,
+      // },
     }
   },
   created() {
@@ -151,14 +211,21 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
   text-align: center;
   font-size: 15px;
   font-weight: bold;
-  background-color: gray;
 }
 .Sidebar .flex-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 1% 5%;
 }
-.Sidebar .flex-item {
+.Sidebar .flex-container-left {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 1% 5%;
+}
+.flex-item {
+  width: 100%;
   padding: 0px 5px;
 }
 .Sidebar .flex-column-container {
@@ -201,15 +268,10 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 .content-box {
   width: 50%;
   height: 300px;
-  background: orange;
+  /* background: orange; */
   display: inline-block;
 }
 
-/* .content {
-  width: 100%;
-  display: inline-block;
-  background-color: gainsboro;
-} */
 .user {
   display: flex;
   flex-wrap: wrap;
@@ -225,8 +287,11 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 .massion {
   border-style: solid;
   border-width: 1px;
-  width: 100%;
   margin: 1px;
-  font-size: 1em;
+  font-size: 2em;
+  width: 100%;
+}
+.massion .massin-text {
+  margin: 10px 20px;
 }
 </style>
