@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { base } from '~/store/base'
+import { base } from '../store/base'
 
 const baseStore = base()
 

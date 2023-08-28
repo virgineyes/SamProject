@@ -18,7 +18,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
-import { base } from '~/store/base'
+import { base } from '../../store/base'
 import { ElMessage } from 'element-plus'
 import { ArrowDown, LocationFilled } from '@element-plus/icons-vue'
 
