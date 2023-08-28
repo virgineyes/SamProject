@@ -49,8 +49,6 @@ const options: RouterOptions = {
 const router: Router = createRouter(options)
 
 const ValidateDeltaDomain = (url: string) => {
-  console.log(process.env.NODE_ENV)
-
   if (
     process.env.NODE_ENV.trim() === 'development' ||
     process.env.NODE_ENV.trim() === 'dev' ||
@@ -65,6 +63,8 @@ const ValidateDeltaDomain = (url: string) => {
 }
 
 router.beforeEach((to, from, next) => {
+  console.log(process.env.NODE_ENV)
+
   console.log('1')
   baseI.loading = true
   const token = to.query.token as string
