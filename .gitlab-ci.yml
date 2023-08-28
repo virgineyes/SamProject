@@ -4,7 +4,7 @@ lintAndTest:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
     entrypoint: ['']
   script:
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/LintAndTestDockerfile" --no-push
@@ -17,12 +17,12 @@ build:
     entrypoint: ['']
   script:
     - DATE=`date '+%Y%m%d.%H%M%S'`
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/Dockerfile"
-      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}:$DATE-${CI_COMMIT_SHA:0:8}"
   rules:
     - if: '$CI_COMMIT_REF_NAME == "master"'
 buildStage:
@@ -31,12 +31,12 @@ buildStage:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
     entrypoint: ['']
   script:
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/BuildStageDockerfile"
-      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}-builder"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}-builder"
   only:
     changes:
       - package.json
@@ -46,10 +46,10 @@ testRunner:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
     entrypoint: ['']
   script:
-    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo $DOCKER_AUTH_CONFIG > /kaniko/.docker/config.json
     - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfiles/TestRunnerDockerfile"
-      --destination "${CI_REGISTRY}/${CI_PROJECT_NAME}-test-runner"
+      --destination "it-docker.deltaww.com/${CI_PROJECT_NAME}-test-runner"
   when: manual
