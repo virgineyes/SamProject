@@ -51,9 +51,7 @@ const router: Router = createRouter(options)
 const ValidateDeltaDomain = (url: string) => {
   if (
     process.env.NODE_ENV.trim() === 'development' ||
-    process.env.NODE_ENV.trim() === 'dev' ||
-    process.env.NODE_ENV.trim() === 'qas' ||
-    process.env.NODE_ENV.trim() === 'prod'
+    process.env.NODE_ENV.trim() === 'production'
   ) {
     return true
   }
