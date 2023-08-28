@@ -61,13 +61,9 @@ const ValidateDeltaDomain = (url: string) => {
 }
 
 router.beforeEach((to, from, next) => {
-  console.log(process.env.NODE_ENV)
-
-  console.log('1')
   baseI.loading = true
   const token = to.query.token as string
   if (token) {
-    console.log('2')
     Cookies.set(import.meta.env.VITE_APP_AUTH_TOKEN_NAME, token, {
       expires: 1000 * 60 * 60 * 6
     })
@@ -75,12 +71,9 @@ router.beforeEach((to, from, next) => {
     baseI.setRedirectUrl(to.path)
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
-    console.log('3')
     if (Object.keys(baseI.getUser)?.length === 0) {
-      console.log('4')
       getCurrentUser()
         .then((response: any) => {
-          console.log('5')
           baseI.setUser(response.data)
         })
         .catch((error: any) => {
@@ -91,49 +84,38 @@ router.beforeEach((to, from, next) => {
           })
         })
         .finally(() => {
-          console.log('6')
           baseI.loading = false
         })
     }
-    console.log('7')
     next()
   } else {
-    console.log('8')
     // Home 不需要登入(大寫區分 Redirect )
     if (to.name === 'Error') {
-      console.log('9')
       next()
     } else {
-      console.log('10')
       localStorage.setItem(
         'loginAuthCount',
         `${Number(localStorage.getItem('loginAuthCount') ?? 0) + 1}`
       )
       let authnURL = import.meta.env.VITE_APP_AUTH_URL
       let frontURL = import.meta.env.VITE_APP_FRONTEND_URL
-      console.log('authnURL', authnURL)
-      console.log('frontURL', frontURL)
 
       if (!ValidateDeltaDomain(authnURL)) {
-        console.log('11')
         authnURL = ''
         next({ name: 'Error', query: { errorCode: '403', redirect: 'false' } })
       }
       if (!ValidateDeltaDomain(frontURL)) {
-        console.log('12')
         frontURL = ''
         next({ name: 'Error', query: { errorCode: '403', redirect: 'false' } })
       }
 
       if (Number(localStorage.getItem('loginAuthCount')) < 3) {
-        console.log('13')
         window.location.href =
           `${authnURL}api/auth/redirect?redirectUrl=` +
           encodeURIComponent(`${frontURL}#${to.path}`) +
           '&errorUrl=' +
           `${frontURL}#/home`
       } else {
-        console.log('14')
         localStorage.setItem('loginAuthCount', '0')
         window.location.href =
           `${authnURL}#/auth/login?redirectUrl=` +
@@ -142,12 +124,10 @@ router.beforeEach((to, from, next) => {
           `${frontURL}#/home`
       }
     }
-    console.log('15')
     baseI.loading = false
   }
 })
 router.afterEach(() => {
-  console.log('16')
   baseI.loading = false
 })
 export default router
