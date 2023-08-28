@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-const pathSrc = path.resolve(__dirname, 'src')
+const pathSrc = path.resolve(__dirname, './src')
 
 export default {
   plugins: [vue()],
