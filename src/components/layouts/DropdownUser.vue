@@ -46,7 +46,6 @@ const handleCommand = (command: string | number | object) => {
             })
             getCurrentUser()
               .then((response: any) => {
-                console.log(response.data)
                 baseI.setUser(response.data)
               })
               .catch((error: any) => {

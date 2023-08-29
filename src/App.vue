@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { base } from './store/base'
+import { base } from '~/store/base'
 
 const baseStore = base()
 const $router = useRouter()

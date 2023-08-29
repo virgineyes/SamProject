@@ -3,8 +3,6 @@
     default-active="1"
     class="desktop-aside-menu"
     :collapse="!baseStore.menuOpen"
-    @open="handleOpen"
-    @close="handleClose"
     @select="handleMenuSelect"
   >
     <el-sub-menu index="1">
@@ -33,12 +31,6 @@ import { useRouter } from 'vue-router'
 const baseStore = base()
 const router = useRouter()
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
 function handleMenuSelect(e: string) {
   router.push({ name: e })
 }
