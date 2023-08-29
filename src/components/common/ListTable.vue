@@ -6,7 +6,7 @@
       v-model="searchInput"
       placeholder="Search"
       @input="props.frontendSearch ? searchFilter($event) : emit('onSearch', $event)"
-    />{{ props.frontendSearch ? 'searchFilter' : 'emit' }}
+    />
     <el-table
       v-loading="props.isLoading"
       class="list-table__table"

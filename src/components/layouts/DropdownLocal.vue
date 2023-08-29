@@ -18,9 +18,10 @@
 </template>
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
-import { base } from '../../store/base'
+import { base } from '~/store/base'
 import { ElMessage } from 'element-plus'
 import { ArrowDown, LocationFilled } from '@element-plus/icons-vue'
+import i18n from '~/config/i18n'
 
 const baseStore = base()
 const windowWidth = ref(0)
@@ -29,8 +30,9 @@ const localList = ref([
   { name: 'en', label: 'English' },
   { name: 'cn', label: '简体中文' }
 ])
-const handleCommand = (command: string) => {
+const handleCommand = (command: 'tw' | 'en' | 'cn') => {
   ElMessage(`click on item ${command}`)
+  i18n.global.locale.value = command
   baseStore.setLanguage(command)
 }
 const isDesktop = computed(() => windowWidth.value >= 768)
