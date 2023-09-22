@@ -8,7 +8,8 @@ export const base = defineStore('base', {
       language: 'tw',
       user: Object,
       menuOpen: false,
-      redirectUrl: ''
+      redirectUrl: '',
+      token: ''
     }
   },
   getters: {
@@ -16,7 +17,8 @@ export const base = defineStore('base', {
     getLogin: (state) => state.login,
     getLanguage: (state) => state.language,
     getUser: (state) => state.user,
-    getRedirectUrl: (state) => state.redirectUrl
+    getRedirectUrl: (state) => state.redirectUrl,
+    getToken: (state) => state.token
   },
   actions: {
     setLoading(value: boolean) {
@@ -33,6 +35,9 @@ export const base = defineStore('base', {
     },
     setRedirectUrl(value: string) {
       this.redirectUrl = value
+    },
+    setToken(value: string) {
+      this.token = value
     }
   }
 })
