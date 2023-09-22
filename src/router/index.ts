@@ -11,8 +11,11 @@ import { base } from '../store/base'
 import { getCurrentUser } from '../util/api/auth'
 import { ElMessage } from 'element-plus'
 import scrollToTop from '~/util/composables/basic'
+import { useRouter, useRoute } from 'vue-router'
 
 const baseI = base(pinia)
+const $router = useRouter()
+const $route = useRoute()
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'home', component: () => import('../views/Home.vue') },
@@ -69,6 +72,7 @@ router.beforeEach((to, from, next) => {
     })
     baseI.setLogin(true)
     baseI.setRedirectUrl(to.path)
+    $router.replace($route.path)
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
     if (Object.keys(baseI.getUser)?.length === 0) {
