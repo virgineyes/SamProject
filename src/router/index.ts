@@ -72,6 +72,7 @@ router.beforeEach((to, from, next) => {
     })
     baseI.setLogin(true)
     baseI.setRedirectUrl(to.path)
+    baseI.setToken(token)
     $router.replace($route.path)
   }
   if (Cookies.get(import.meta.env.VITE_APP_AUTH_TOKEN_NAME)) {
