@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "node server.js",
     "test": "vue-cli-service serve --mode test",
     "qas": "vue-cli-service serve --mode qas",
     "stg": "vue-cli-service serve --mode stg"
