@@ -36,9 +36,7 @@
           </div>
           <div class="flex-container-left massion">
             <span>
-              <div class="massin-text">
-                <Icon type="md-bicycle" style="color: red;" />整理協會中心協會中心(協會中心)
-              </div>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />整理協會(協會中心)</div>
             </span>
           </div>
           <div class="flex-container-left massion">
@@ -54,9 +52,8 @@
             <span style="font-size:3em;">每周任務:</span>
           </div>
           <div class="flex-container-left massion">
-            <span>
-              <div class="massin-text"><Icon type="md-checkmark-circle" style="color: skyblue;" />滑板課(滑板場)</div>
-            </span>
+              <div class="massin-text"><Icon type="md-checkmark-circle" style="color: skyblue;" />
+                <span>滑板課(滑板場)</span></div>
           </div>
           <div class="flex-container-left massion">
             <span>
@@ -65,9 +62,7 @@
           </div>
           <div class="flex-container-left massion">
             <span>
-              <div class="massin-text">
-                <Icon type="md-bicycle" style="color: red;" />整理協會中心協會中心(協會中心)
-              </div>
+              <div class="massin-text"><Icon type="md-bicycle" style="color: red;" />整理協會中心協會中心(協會中心)</div>
             </span>
           </div>
           <div class="flex-container-left massion">
@@ -82,7 +77,12 @@
     <div class="Body" v-if="isLogin">
       <div style="margin: 0px 2px;" class="flex-container">
         <div class="content-box">
-          <!-- <Bar id="my-chart-id" :options="chartOptions" :data="chartData" /> -->
+          <div class="box2">
+            <p>selectAll 1</p>
+            <p>selectAll 2</p>
+            <p>selectAll 3</p>
+            <p>selectAll 4</p>
+          </div>
         </div>
         <div class="content-box">
           XXX
@@ -102,6 +102,7 @@
 import { typeList } from "../../util/enums/bulletin-board"
 import { mapGetters } from "vuex"
 import { mapActions } from "vuex"
+import * as d3 from "d3"
 // import { Bar } from "vue-chartjs"
 // import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js"
 
@@ -131,6 +132,9 @@ export default {
   },
   created() {
     window.addEventListener("resize", this.windowResizeListener)
+  },
+  mounted() {
+    d3.selectAll('.box2 p').style('color', 'red');
   },
   destroyed() {
     window.removeEventListener("resize", this.windowResizeListener)
@@ -222,6 +226,7 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  flex-wrap: nowrap;
   padding: 1% 5%;
 }
 .flex-item {
@@ -259,12 +264,6 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
   width: 100%;
 }
 
-.demo-carousel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .content-box {
   width: 50%;
   height: 300px;
@@ -293,5 +292,6 @@ function setDataGroup(vueInstance, dataGroupTemp, number) {
 }
 .massion .massin-text {
   margin: 10px 20px;
+  text-align: left;
 }
 </style>
