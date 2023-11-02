@@ -1,8 +1,8 @@
 {
-    "name": "wanna-project",
+    "name": "wanna-project-frontend",
     "version": "1.0.0",
     "description": "it's a awesome vue project",
-    "main": "server.js",
+    "main": "web.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "node server.js" 
