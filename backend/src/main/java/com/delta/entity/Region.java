@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @Entity
 @ApiModel(value = "Region", description = "區域")
-public class Region {
+public class Region extends BaseEntity {
 
   @Getter
   @Setter

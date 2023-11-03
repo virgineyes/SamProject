@@ -1,21 +1,16 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
-import vueDeltaIt from "@deltaww/vue-delta-it"
-import "vue-multiselect/dist/vue-multiselect.min.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "font-awesome/css/font-awesome.min.css"
 import Swal from "sweetalert2/dist/sweetalert2.all.min.js"
 import "@sweetalert2/theme-bulma/bulma.min.css"
 import "view-design/dist/styles/iview.css"
-import Multiselect from "vue-multiselect"
-Vue.component("multiselect", Multiselect)
 import "@/assets/public.css"
 import App from "@/App"
 import store from "@/store/index"
 import router from "@/config/router"
 import i18n from "@/config/lang"
-import { menu } from "@/util/menu"
 import { Translate, ExceptionHandling } from "@/util/common"
 import * as types from "@/store/mutations_types.js"
 import { getCookie, delCookie } from "@/util/cookie"
@@ -69,9 +64,6 @@ Vuex.Store.prototype.$authHttp = authAxiosInstance
 Vuex.Store.prototype.$Swal = Swal
 Vuex.Store.prototype.$router = router
 Vuex.Store.prototype.$i18n = i18n
-
-Vue.use(vueDeltaIt)
-
 Vue.config.productionTip = false
 
 Vue.directive("upper-case", {

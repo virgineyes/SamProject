@@ -69,7 +69,8 @@ public class Course extends BaseEntity {
   @Getter
   @Setter
   @ApiModelProperty(value = "標籤")
-  private List<String> label;
+  @OneToMany
+  private List<Label> label;
  
   @Getter
   @Setter

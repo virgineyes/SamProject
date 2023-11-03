@@ -38,9 +38,7 @@ public class TeacherService extends BasicService<Teacher> {
     } 
     Teacher teacher = new Teacher();
     teacher.setUserProfile(userProfileOpt.get());
-    teacher.setExperience(request.getExperience());
     teacher.setImgUrl(request.getImgUrl());
-    teacher.setSkill(request.getSkill());
     return repository.save(teacher);
   }
   
@@ -50,9 +48,7 @@ public class TeacherService extends BasicService<Teacher> {
       throw new SystemDataExistsException("Teacher Could not Find");
     } 
     Teacher teacher = teacherOpt.get();
-    teacher.setExperience(request.getExperience());
     teacher.setImgUrl(request.getImgUrl());
-    teacher.setSkill(request.getSkill());
     return repository.save(teacher);
   }
 }

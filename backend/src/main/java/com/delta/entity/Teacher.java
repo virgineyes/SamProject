@@ -40,11 +40,6 @@ public class Teacher extends BaseEntity {
   @ApiModelProperty(value = "自我介紹")
   private String selfIntroduction;
   
-//  @Getter
-//  @Setter
-//  @ApiModelProperty(value = "經歷")
-//  private String experience;  
-  
   @Getter
   @Setter
   @ApiModelProperty(value = "所屬公司")
@@ -63,7 +58,8 @@ public class Teacher extends BaseEntity {
   @Getter
   @Setter
   @ApiModelProperty(value = "標籤")
-  private List<String> label;
+  @OneToMany
+  private List<Label> label;
   
   /*
    *  尚未認證，測試中，驗證成功
