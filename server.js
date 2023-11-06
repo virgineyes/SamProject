@@ -3,7 +3,7 @@ var express = require('express');
 var serveStatic = require('serve-static');
 var path = require('path');
 
-app = express();
+var app = express();
 
 app.use('/',serveStatic(path.join(__dirname, '/dist')));
 var port = process.env.PORT || 8080;
