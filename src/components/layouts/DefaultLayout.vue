@@ -9,7 +9,7 @@
         <el-header class="header">
           <DefaultHeader />
         </el-header>
-        <NavigationHeader></NavigationHeader>
+        <!-- <NavigationHeader></NavigationHeader> -->
         <el-container class="layout-container__main">
           <el-main class="main" id="main">
             <slot />
@@ -26,7 +26,7 @@
 import DefaultHeader from './DefaultHeader.vue'
 import DesktopAsideMenu from '~/components/layouts/DesktopAsideMenu.vue'
 import MobileAsideMenu from '~/components/layouts/MobileAsideMenu.vue'
-import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
+// import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
 </script>
 <style lang="scss" scoped>
 .layout {
@@ -44,7 +44,7 @@ import NavigationHeader from '~/components/layouts/NavigationHeader.vue'
   box-shadow: 0 0 10px rgba(#000, 0.1);
 }
 .header {
-  background-color: $delta-blue;
+  background-color: $delta-gold;
   line-height: 60px;
   text-align: center;
   font-size: 16px;

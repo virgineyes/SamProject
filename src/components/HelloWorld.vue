@@ -1,95 +1,120 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-const input = ref('element-plus')
-
-const curDate = ref('')
-
-const toast = () => {
-  ElMessage.success('Hello')
-}
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
-
-  <p>
-    See
-    <a href="https://vuejs.org/" target="_blank">Vue 3</a>
-    and
-    <a href="https://element-plus.org" target="_blank">element-plus</a> for more
-    information.
-  </p>
-
-  <!-- example components -->
-  <div class="mb-4">
-    <el-button size="large" @click="toast">El Message </el-button>
-  </div>
-
-  <div class="my-2 text-center flex flex-wrap justify-center items-center">
-    <el-button @click="count++">count is: {{ count }}</el-button>
-    <el-button type="primary" @click="count++">count is: {{ count }}</el-button>
-    <el-button type="success" @click="count++">count is: {{ count }}</el-button>
-    <el-button type="warning" @click="count++">count is: {{ count }}</el-button>
-    <el-button type="danger" @click="count++">count is: {{ count }}</el-button>
-    <el-button type="info" @click="count++">count is: {{ count }}</el-button>
-  </div>
-
   <div>
-    <el-tag type="success" class="m-1">Tag 1</el-tag>
-    <el-tag type="warning" class="m-1">Tag 1</el-tag>
-    <el-tag type="danger" class="m-1">Tag 1</el-tag>
-    <el-tag type="info" class="m-1">Tag 1</el-tag>
+    <h1>IsInit: {{ Vue3GoogleOauth.isInit }}</h1>
+    <h1>IsAuthorized: {{ Vue3GoogleOauth.isAuthorized }}</h1>
+    <h2 v-if="user">signed user: {{user}}</h2>
+    <button @click="handleClickSignIn" :disabled="!Vue3GoogleOauth.isInit || Vue3GoogleOauth.isAuthorized">sign in</button>
+    <button @click="handleClickGetAuthCode" :disabled="!Vue3GoogleOauth.isInit">get authCode</button>
+    <button @click="handleClickSignOut" :disabled="!Vue3GoogleOauth.isAuthorized">sign out</button>
+    <button @click="handleClickDisconnect" :disabled="!Vue3GoogleOauth.isAuthorized">disconnect</button>
   </div>
-
-  <div class="my-2">
-    <el-input class="m-2" v-model="input" style="width: 200px" />
-    <el-date-picker
-      class="m-2"
-      v-model="curDate"
-      type="date"
-      placeholder="Pick a day"
-    ></el-date-picker>
-  </div>
-
-  <p>For example, we can custom primary color to 'green'.</p>
-
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test components.
-  </p>
-  <p>
-    Edit
-    <code>styles/element/var.scss</code> to test scss variables.
-  </p>
-
-  <p>
-    Full Example:
-    <a
-      href="https://github.com/element-plus/element-plus-vite-starter"
-      target="_blank"
-      >element-plus-vite-starter</a
-    >
-    | On demand Example:
-    <a
-      href="https://github.com/element-plus/unplugin-element-plus"
-      target="_blank"
-      >unplugin-element-plus/examples/vite</a
-    >
-  </p>
-</template>
-
-<style>
-.el-button {
-  margin: 4px;
-}
-
-.el-button + .el-button {
-  margin-left: 0;
-  margin: 4px;
-}
-</style>
+  </template>
+  
+  <script>
+  import { inject, toRefs } from "vue";
+  
+  export default {
+    name: "HelloWorld",
+    props: {
+      msg: String,
+    },
+  
+    data(){
+      return {
+        user: '',
+      }
+    },
+  
+    methods: {
+      async handleClickSignIn(){
+        try {
+          const googleUser = await this.$gAuth.signIn();
+          if (!googleUser) {
+            return null;
+          }
+          console.log("googleUser", googleUser);
+          this.user = googleUser.getBasicProfile().getEmail();
+          console.log("getId", this.user);
+          console.log("getBasicProfile", googleUser.getBasicProfile());
+          console.log("getAuthResponse", googleUser.getAuthResponse());
+          console.log(
+            "getAuthResponse",
+            this.$gAuth.instance.currentUser.get().getAuthResponse()
+          );
+  
+        } catch (error) {
+          //on fail do something
+          console.error(error);
+          return null;
+        }
+      },
+  
+      async handleClickGetAuthCode(){
+        try {
+          const authCode = await this.$gAuth.getAuthCode();
+          console.log("authCode", authCode);
+        } catch(error) {
+          //on fail do something
+          console.error(error);
+          return null;
+        }
+      },
+  
+      async handleClickSignOut() {
+        try {
+          await this.$gAuth.signOut();
+          console.log("isAuthorized", this.Vue3GoogleOauth.isAuthorized);
+          this.user = "";
+        } catch (error) {
+          console.error(error);
+        }
+      },
+  
+      handleClickDisconnect() {
+        window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
+      },
+    },
+    setup(props) {
+      const { isSignIn } = toRefs(props);
+      const Vue3GoogleOauth = inject("Vue3GoogleOauth");
+  
+      const handleClickLogin = () => {};
+      return {
+        Vue3GoogleOauth,
+        handleClickLogin,
+        isSignIn,
+      };
+    },
+  };
+  </script>
+  
+  <style>
+  button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    -webkit-transition: 0.1s;
+    transition: 0.1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-right: 1em;
+  }
+  
+  button:disabled {
+    background: #fff;
+    color: #ddd;
+    cursor: not-allowed;
+  }
+  </style>

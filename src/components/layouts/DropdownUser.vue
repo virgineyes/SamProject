@@ -11,6 +11,11 @@
         <el-dropdown-item command="logout">Logout</el-dropdown-item>
         <el-dropdown-item command="switchUser">Switch User</el-dropdown-item>
       </el-dropdown-menu>
+
+      <el-dropdown-menu>
+        <el-dropdown-item command="logout">Logout</el-dropdown-item>
+        <el-dropdown-item command="switchUser">Switch User</el-dropdown-item>
+      </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>

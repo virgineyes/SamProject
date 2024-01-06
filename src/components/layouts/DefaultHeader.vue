@@ -19,8 +19,8 @@
         class="default-header__left-title default-header__center-title"
         @click="$router.push({ name: 'home' })"
       >
-        <img class="default-header__logo" src="../../assets/logo_w.svg" />
-        <span class="default-header__title">System Name</span>
+        <!-- <img class="default-header__logo" src="../../assets/logo_w.svg" /> -->
+        <span class="default-header__title">想學教育</span>
       </a>
     </div>
 
@@ -45,7 +45,7 @@ function changeCollapseStatus(bool: boolean) {
 <style lang="scss" scoped>
 .default-header {
   height: 100%;
-  color: #fff;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,7 +62,7 @@ function changeCollapseStatus(bool: boolean) {
   &__left-title {
     display: inline-flex;
     align-items: baseline;
-    color: #fff;
+    color: black;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
